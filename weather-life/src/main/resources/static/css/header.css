@@ -127,3 +127,39 @@
 .wl-header-controls {
     background: rgba(255, 255, 255, 0.7);
 }
+
+/* 로고 마스코트 — 구름 아이콘 자리, 파스텔 둥근 박스 안에 계절별 캐릭터 */
+.wl-mascot {
+    position: relative;
+    flex: none;
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #fff1e1, #fad6c4);
+    box-shadow: 0 3px 10px rgba(120, 70, 40, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+.wl-logo .wl-mascot img {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    transform: translateY(4%) scale(1.06);
+}
+html[data-season="spring"] .wl-mascot--spring,
+html[data-season="summer"] .wl-mascot--summer,
+html[data-season="autumn"] .wl-mascot--autumn,
+html[data-season="winter"] .wl-mascot--winter,
+html:not([data-season]) .wl-mascot--autumn {
+    display: block;
+}
+@media (max-width: 600px) {
+    .wl-mascot {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+    }
+}

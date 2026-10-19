@@ -5,7 +5,13 @@
 <!-- 헤더: 로고, 지역 선택 -->
 <header class="wl-header" th:fragment="header">
     <a class="wl-logo" th:href="@{/}">
-        <img th:src="@{/image/weather/rain.svg}" alt="Weather Life 로고">
+        <!-- 로고 마스코트: 계절마다 바뀌는 손 흔드는 캐릭터 (html[data-season] 값으로 header.css가 하나만 보여 줌) -->
+        <span class="wl-mascot" role="img" aria-label="Weather Life 마스코트">
+            <img class="wl-mascot--spring" th:src="@{/weather/mascot/wave_spring.webp}" alt="">
+            <img class="wl-mascot--summer" th:src="@{/weather/mascot/wave_summer.webp}" alt="">
+            <img class="wl-mascot--autumn" th:src="@{/weather/mascot/wave_autumn.webp}" alt="">
+            <img class="wl-mascot--winter" th:src="@{/weather/mascot/wave_winter.webp}" alt="">
+        </span>
         <div class="wl-logo-text">
             <h1>Weather Life</h1>
             <p>AI가 예측하는, 조금 더 특별한 내일의 날씨</p>
