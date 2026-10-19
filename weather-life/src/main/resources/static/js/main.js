@@ -203,162 +203,237 @@
     window.loadOutfitCard = loadOutfitCard;
 })();
 
-// ===== 오늘의 날씨: 오늘/내일/모레 AI 예측 온도 + 기상청 온도, 불쾌지수 =====
-// AI 예측 온도(AiForecastController.forecast, GET /api/weather/ai)와
-// 기상청 온도·습도(APIController.getShortForecast, GET /api/short)로 각 카드를 채운다.
-// 불쾌지수는 오늘의 AI 예측 온도 + 기상청 습도(REH)로 계산해 온도계 하단에 표시하고,
-// 온도계를 0~100 로 보고 그 값의 위치에 /image/icon/bag.svg 마커를 놓는다.
+// ===== AI 예측 대상 시각에 가장 가까운 기상청 DB 예보로 오늘/내일/모레 비교 =====
+// AI: /api/weather/ai, 기상청: /api/weather/short?gu=...&date=...
+// validTimeKst의 실제 UTC offset을 해석하고, DB의 forecastAt은 한국 시간으로 처리합니다.
 (() => {
     const LOG = '[weather-life]';
-    const REGION_PREFIX = '서울특별시 ';
+    const KST_OFFSET_MS = 9 * 60 * 60 * 1000;
+    const DAY_MS = 24 * 60 * 60 * 1000;
     const DAY_KEYS = ['today', 'tomorrow', 'dayafter'];
     const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
+    let latestRequest = 0;
+    let activeController;
 
     const pad = (n) => String(n).padStart(2, '0');
-    const kmaDateKey = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
-    const isoDateKey = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-    const formatDateLabel = (d) => `${pad(d.getMonth() + 1)}. ${pad(d.getDate())} (${WEEKDAYS[d.getDay()]})`;
-    const formatDiscomfortDate = (d) => `오늘 (${pad(d.getMonth() + 1)}월 ${pad(d.getDate())}일)`;
+    const numericValue = (value) => {
+        if (!['number', 'string'].includes(typeof value) || String(value).trim() === '') return null;
+        const number = Number(value);
+        return Number.isFinite(number) ? number : null;
+    };
 
-    // 오늘/내일/모레 날짜(자정 기준)
+    // AI에는 Z 또는 +09:00 같은 offset이 필수입니다. DB의 LocalDateTime에만 +09:00을 붙입니다.
+    const parseForecastTime = (value, assumeKst = false) => {
+        if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(value)) return null;
+        const hasOffset = /(?:Z|[+-]\d{2}:\d{2})$/i.test(value);
+        if (!hasOffset && !assumeKst) return null;
+        const timestamp = Date.parse(hasOffset ? value : `${value}+09:00`);
+        return Number.isFinite(timestamp) ? timestamp : null;
+    };
+
+    // 브라우저/PC 시간대 설정과 무관하게 한국 날짜·시각을 만듭니다.
+    const kstParts = (timestamp) => {
+        const date = new Date(timestamp + KST_OFFSET_MS);
+        return {
+            date: `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`,
+            time: `${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}`,
+            weekday: WEEKDAYS[date.getUTCDay()]
+        };
+    };
+    const shiftDate = (date, days) =>
+        kstParts(Date.parse(`${date}T00:00:00+09:00`) + days * DAY_MS).date;
+    const neighboringDates = (date) => [-1, 0, 1].map((offset) => shiftDate(date, offset));
     const targetDates = () => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        return DAY_KEYS.map((key, i) => {
-            const date = new Date(today);
-            date.setDate(date.getDate() + i);
-            return { key, date };
-        });
+        const today = kstParts(Date.now()).date;
+        return DAY_KEYS.map((key, offset) => ({ key, date: shiftDate(today, offset) }));
     };
 
-    // AiForecastController.forecast 응답: 날짜(yyyy-MM-dd) -> AI 예측 기온
-    const fetchAiTemps = async (district) => {
-        const res = await fetch(`/api/weather/ai?gu=${encodeURIComponent(district)}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+    const fetchAiForecasts = async (district, signal) => {
+        const params = new URLSearchParams({ gu: district });
+        const response = await fetch(`/api/weather/ai?${params}`, { signal });
+        if (!response.ok) throw new Error(`AI 예측 조회 실패 (HTTP ${response.status})`);
+        const data = await response.json();
+        if (!Array.isArray(data?.forecasts)) throw new Error('AI 예측 목록이 없습니다.');
+
         const byDate = new Map();
-        (data?.forecasts ?? []).forEach((f) => {
-            if (f?.date) byDate.set(f.date, f.temperatureC);
+        data.forecasts.forEach((forecast) => {
+            const temperature = numericValue(forecast?.temperatureC);
+            if (temperature === null) return;
+            const timestamp = parseForecastTime(forecast?.validTimeKst);
+            // date 필드보다 실제 예측 대상 시각의 한국 날짜를 우선합니다.
+            const date = timestamp === null ? forecast?.date : kstParts(timestamp).date;
+            if (!date) return;
+            const previous = byDate.get(date);
+            // 날짜별 여러 값이 온 경우 유효한 시각 중 가장 이른 값을 일관되게 선택합니다.
+            if (!previous || (timestamp !== null &&
+                    (previous.timestamp === null || timestamp < previous.timestamp))) {
+                byDate.set(date, { temperature, timestamp });
+            }
         });
         return byDate;
     };
 
-    // APIController.getShortForecast 응답: 날짜(yyyyMMdd) -> { TMP:{hhmm:값}, REH:{hhmm:값} }
-    const fetchKmaByDate = async (district) => {
-        const regionName = REGION_PREFIX + district;
-        const res = await fetch(`/api/short?regionName=${encodeURIComponent(regionName)}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        const header = data?.response?.header;
-        if (header && header.resultCode !== '00') {
-            throw new Error(`기상청 응답 오류 ${header.resultCode} ${header.resultMsg}`);
+    const fetchKmaDay = async (district, date, signal) => {
+        const params = new URLSearchParams({ gu: district, date });
+        const response = await fetch(`/api/weather/short?${params}`, { signal });
+        // 전날 정리 또는 아직 수집되지 않은 날짜는 정상적인 데이터 부재로 취급합니다.
+        if (response.status === 404) return [];
+        if (!response.ok) throw new Error(`기상청 예보 조회 실패 (${date}, HTTP ${response.status})`);
+        const data = await response.json();
+        if (data?.date !== date || !Array.isArray(data?.hourly)) {
+            throw new Error(`기상청 예보 응답 형식이 올바르지 않습니다. (${date})`);
         }
-
-        const items = data?.response?.body?.items?.item ?? [];
-        const byDate = new Map();
-        items.forEach((item) => {
-            if (item.category !== 'TMP' && item.category !== 'REH') return;
-            if (!byDate.has(item.fcstDate)) byDate.set(item.fcstDate, { TMP: {}, REH: {} });
-            byDate.get(item.fcstDate)[item.category][item.fcstTime] = Number(item.fcstValue);
+        return data.hourly.flatMap((hour) => {
+            const timestamp = parseForecastTime(hour?.forecastAt, true);
+            const temperature = numericValue(hour?.temperature);
+            if (timestamp === null || temperature === null || kstParts(timestamp).date !== date) return [];
+            return [{ timestamp, temperature, humidity: numericValue(hour.humidity) }];
         });
-        return byDate;
     };
 
-    // 기준 시각(HHmm) 이후 가장 가까운 시각의 값을 고른다. 없으면 그 날의 마지막 값을 쓴다.
-    const pickByHour = (hourMap, nowHourKey) => {
-        const hours = Object.keys(hourMap ?? {}).sort();
-        if (hours.length === 0) return null;
-        const hour = hours.find((h) => h >= nowHourKey) ?? hours[hours.length - 1];
-        return hourMap[hour];
-    };
+    // 시각 차이의 절댓값으로 비교합니다. 차이가 같으면 앞선 예보 시각을 선택합니다.
+    const pickNearestForecast = (hours, targetTimestamp) => hours.reduce((best, hour) => {
+        const difference = Math.abs(hour.timestamp - targetTimestamp);
+        if (!best || difference < best.difference ||
+                (difference === best.difference && hour.timestamp < best.timestamp)) {
+            return { ...hour, difference };
+        }
+        return best;
+    }, null);
 
-    // 기상청 불쾌지수 공식: 0.81*T + 0.01*RH*(0.99*T - 14.3) + 46.3
+    const setField = (scope, field, value) => {
+        scope.querySelectorAll(`[data-field="${field}"]`).forEach((element) => {
+            element.textContent = value;
+        });
+    };
+    const setComparison = (card, text, detail = text) => {
+        setField(card, 'comparisonTime', text);
+        const label = card.querySelector('[data-field="comparisonTime"]');
+        if (label) label.title = detail;
+    };
     const calcDiscomfortIndex = (tempC, humidityPct) =>
         0.81 * tempC + 0.01 * humidityPct * (0.99 * tempC - 14.3) + 46.3;
 
-    // weather_character_rules.json의 sticker.first_match 구간과 동일한 기준(68/75/80)
-    const discomfortLevelLabel = (di) => {
-        if (di < 68) return '쾌적';
-        if (di < 75) return '보통';
-        if (di < 80) return '나쁨';
-        return '매우 나쁨';
-    };
-
-    // /image/icon/expressions/ 의 01~04 표정 아이콘을 불쾌지수 단계에 맞춰 고른다.
-    const discomfortExpressionIcon = (di) => {
-        if (di < 68) return '/image/icon/expressions_color/01-comfortable.png';
-        if (di < 75) return '/image/icon/expressions_color/02-slight-discomfort.png';
-        if (di < 80) return '/image/icon/expressions_color/03-uncomfortable.png';
-        return '/image/icon/expressions_color/04-very-uncomfortable.png';
-    };
-
-    const setField = (scope, field, value) => {
-        scope.querySelectorAll(`[data-field="${field}"]`).forEach((el) => {
-            el.textContent = value;
+    const resetWeather = (dates) => {
+        dates.forEach(({ key, date }) => {
+            const card = document.querySelector(`[data-day="${key}"]`);
+            if (!card) return;
+            setField(card, 'aiTemp', '—');
+            setField(card, 'kmaTemp', '—');
+            setComparison(card, '예보를 불러오는 중');
+            delete card.dataset.aiForecastAt;
+            delete card.dataset.kmaForecastAt;
+            const local = kstParts(Date.parse(`${date}T00:00:00+09:00`));
+            setField(card, 'dateLabel', `${date.slice(5, 7)}. ${date.slice(8)} (${local.weekday})`);
         });
+        const today = dates[0].date;
+        setField(document, 'discomfortDate', `오늘 (${today.slice(5, 7)}월 ${today.slice(8)}일)`);
+        setField(document, 'discomfortIndex', '—');
+        const marker = document.querySelector('[data-field="discomfortMarker"]');
+        if (marker) marker.hidden = true;
     };
 
     const loadTodayWeather = async (district) => {
-        console.info(LOG, '오늘의 날씨 요청:', district);
+        const requestId = ++latestRequest;
+        activeController?.abort();
+        const controller = new AbortController();
+        activeController = controller;
+        const { signal } = controller;
+        const dates = targetDates();
+        resetWeather(dates);
+
         try {
-            const [aiTemps, kmaByDate] = await Promise.all([fetchAiTemps(district), fetchKmaByDate(district)]);
+            const aiByDate = await fetchAiForecasts(district, signal);
+            if (requestId !== latestRequest) return;
 
-            const now = new Date();
-            const nowHourKey = `${pad(now.getHours())}00`;
-            let todayAiTemp = null;
-            let todayHumidity = null;
-
-            targetDates().forEach(({ key, date }) => {
+            const requiredDates = new Set();
+            dates.forEach(({ key, date }) => {
                 const card = document.querySelector(`[data-day="${key}"]`);
                 if (!card) return;
-
-                const aiTemp = aiTemps.get(isoDateKey(date));
-                if (typeof aiTemp === 'number' && Number.isFinite(aiTemp)) {
-                    setField(card, 'aiTemp', Math.round(aiTemp));
-                    if (key === 'today') todayAiTemp = aiTemp;
+                const ai = aiByDate.get(date);
+                if (!ai) {
+                    setComparison(card, 'AI 예측 정보 없음');
+                    return;
                 }
-
-                const kmaDay = kmaByDate.get(kmaDateKey(date));
-                const kmaTemp = pickByHour(kmaDay?.TMP, nowHourKey);
-                if (typeof kmaTemp === 'number' && Number.isFinite(kmaTemp)) {
-                    setField(card, 'kmaTemp', Math.round(kmaTemp));
+                setField(card, 'aiTemp', Math.round(ai.temperature));
+                if (ai.timestamp === null) {
+                    setComparison(card, 'AI 예측 시각 확인 불가');
+                    return;
                 }
-
-                if (key === 'today') {
-                    const reh = pickByHour(kmaDay?.REH, nowHourKey);
-                    if (typeof reh === 'number' && Number.isFinite(reh)) todayHumidity = reh;
-
-                    const dateEl = card.querySelector('[data-field="dateLabel"]');
-                    if (dateEl) dateEl.textContent = formatDateLabel(date);
-
-                    const discomfortDateEl = document.querySelector('[data-field="discomfortDate"]');
-                    if (discomfortDateEl) discomfortDateEl.textContent = formatDiscomfortDate(date);
-                }
+                const target = kstParts(ai.timestamp);
+                card.dataset.aiForecastAt = `${target.date}T${target.time}`;
+                setComparison(card, `AI ${target.time} · 기상청 조회 중`);
+                // 자정 전후에는 인접 날짜의 예보가 더 가까울 수 있습니다.
+                neighboringDates(date).forEach((day) => requiredDates.add(day));
             });
 
-            if (typeof todayAiTemp === 'number' && typeof todayHumidity === 'number') {
-                const di = Math.max(0, Math.min(100, calcDiscomfortIndex(todayAiTemp, todayHumidity)));
-                const diRounded = Math.round(di);
-                setField(document, 'discomfortIndex', diRounded);
-                setField(document, 'discomfortLevel', discomfortLevelLabel(di));
+            const results = await Promise.all([...requiredDates].map(async (date) => {
+                try {
+                    return { date, hours: await fetchKmaDay(district, date, signal) };
+                } catch (error) {
+                    if (signal.aborted) throw error;
+                    console.warn(LOG, error.message);
+                    return { date, hours: [], error };
+                }
+            }));
+            if (requestId !== latestRequest) return;
+            const kmaByDate = new Map(results.map((result) => [result.date, result]));
 
-                const marker = document.querySelector('[data-field="discomfortMarker"]');
-                if (marker) {
-                    marker.style.bottom = `${di}%`;
-                    marker.src = discomfortExpressionIcon(di);
+            dates.forEach(({ key, date }) => {
+                const card = document.querySelector(`[data-day="${key}"]`);
+                const ai = aiByDate.get(date);
+                if (!card || !ai || ai.timestamp === null) return;
+                const target = kstParts(ai.timestamp);
+                // 대상 날짜 조회 자체가 실패하면 다른 날짜로 조용히 대체하지 않습니다.
+                if (kmaByDate.get(date)?.error) {
+                    setComparison(card, `AI ${target.time} · 기상청 조회 실패`);
+                    return;
+                }
+                const days = neighboringDates(date).map((day) => kmaByDate.get(day));
+                const nearest = pickNearestForecast(days.flatMap((day) => day?.hours ?? []), ai.timestamp);
+                if (!nearest) {
+                    const reason = days.some((day) => day?.error) ? '조회 실패' : '예보 없음';
+                    setComparison(card, `AI ${target.time} · 기상청 ${reason}`);
+                    return;
                 }
 
-                console.info(LOG, `불쾌지수 계산: AI 예측 온도 ${todayAiTemp}, 습도 ${todayHumidity} -> ${diRounded}`);
-            }
-        } catch (e) {
-            console.warn(LOG, '오늘의 날씨를 불러오지 못해 기존 값을 유지합니다:', e.message);
+                const matched = kstParts(nearest.timestamp);
+                const matchedLabel = matched.date === target.date ? matched.time :
+                    `${matched.date.slice(5).replace('-', '.')} ${matched.time}`;
+                const label = `AI ${target.time} · 기상청 ${matchedLabel} (한국 시간)`;
+                const differenceMinutes = Math.round(nearest.difference / 60000);
+                const detail = `AI ${target.date} ${target.time} / 기상청 ${matched.date} ${matched.time}` +
+                    ` (한국 시간, 차이 ${differenceMinutes}분)`;
+                setField(card, 'kmaTemp', Math.round(nearest.temperature));
+                setComparison(card, label, detail);
+                card.dataset.kmaForecastAt = `${matched.date}T${matched.time}`;
+
+                if (key === 'today' && nearest.humidity !== null &&
+                        nearest.humidity >= 0 && nearest.humidity <= 100) {
+                    const di = Math.max(0, Math.min(100, calcDiscomfortIndex(ai.temperature, nearest.humidity)));
+                    setField(document, 'discomfortIndex', Math.round(di));
+                    const marker = document.querySelector('[data-field="discomfortMarker"]');
+                    if (marker) {
+                        marker.hidden = false;
+                        marker.style.bottom = `${di}%`;
+                        marker.title = detail;
+                    }
+                }
+                console.info(LOG, '예보 시각 비교:', district, detail);
+            });
+        } catch (error) {
+            if (requestId !== latestRequest || signal.aborted) return;
+            dates.forEach(({ key }) => {
+                const card = document.querySelector(`[data-day="${key}"]`);
+                if (card) setComparison(card, 'AI 예측을 불러오지 못했어요');
+            });
+            console.warn(LOG, '날씨 비교 조회 실패:', error.message);
         }
     };
 
     document.addEventListener('DOMContentLoaded', () => {
         const select = document.querySelector('select[name="district"]');
         if (!select) return;
-
         loadTodayWeather(select.value);
         select.addEventListener('change', () => loadTodayWeather(select.value));
     });

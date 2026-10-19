@@ -4,10 +4,10 @@
 
 <!--
   오늘의 날씨: 왼쪽(오늘 큰 카드 + 내일/모레 작은 카드 2칸) / 오른쪽(불쾌지수, 왼쪽 전체 높이에 맞춰 늘어남).
-  초기 렌더링은 th:with 의 목업 값을 보여주고, js/main.js 가 아래 API로 실제 값을 덮어쓴다.
+  초기 온도는 —로 표시하고, js/main.js가 AI 예측 시각과 가장 가까운 기상청 예보를 연결한다.
     - AI 예측 온도(data-field="aiTemp")      : GET /api/weather/ai?gu=... (AiForecastController.forecast)
-    - 기상청 온도(data-field="kmaTemp")       : GET /api/short?regionName=... (APIController.getShortForecast)
-    - 불쾌지수(data-field="discomfortIndex") : AI 예측 온도 + 기상청 습도(REH)로 계산
+    - 기상청 온도(data-field="kmaTemp")       : GET /api/weather/short?gu=...&date=... (DB 시간별 예보)
+    - 불쾌지수(data-field="discomfortIndex") : AI 예측 온도 + 선택된 기상청 예보 시각의 습도로 계산
 -->
 <section class="wl-card wl-today" th:fragment="today-weather">
     <h2 class="wl-title">
@@ -21,7 +21,7 @@
             <article class="wl-today-card" data-day="today">
                 <div class="wl-day-head">
                     <div class="wl-day-head-left">
-                        <span class="wl-day-date" data-field="dateLabel" th:text="${dailyWeathers[0].dateLabel}">07. 12 (일)</span>
+                        <span class="wl-day-date" data-field="dateLabel">—</span>
                         <span class="wl-day-tag">오늘</span>
                     </div>
 
@@ -39,11 +39,12 @@
                 <div class="wl-today-body">
                     <p class="wl-today-label">오늘의 온도</p>
                     <p class="wl-today-temp">
-                        <strong data-field="aiTemp" th:text="${dailyWeathers[0].temperature}">22</strong><span class="wl-deg">℃</span>
+                        <strong data-field="aiTemp">—</strong><span class="wl-deg">℃</span>
                         <span class="wl-sep">/</span>
-                        <strong data-field="kmaTemp" th:text="${dailyWeathers[0].kmaTemp}">22</strong><span class="wl-deg">℃</span>
+                        <strong data-field="kmaTemp">—</strong><span class="wl-deg">℃</span>
                         <span class="wl-kma-tag">기상청</span>
                     </p>
+                    <p class="wl-comparison-time" data-field="comparisonTime" aria-live="polite">예보를 불러오는 중</p>
                 </div>
             </article>
 
@@ -52,20 +53,22 @@
                 <article class="wl-mini-card" data-day="tomorrow">
                     <p class="wl-mini-title" th:text="${dailyWeathers[1].dayTag}">내일</p>
                     <p class="wl-mini-temp">
-                        <strong data-field="aiTemp" th:text="${dailyWeathers[1].temperature}">26</strong><span class="wl-deg">℃</span>
+                        <strong data-field="aiTemp">—</strong><span class="wl-deg">℃</span>
                         <span class="wl-sep">/</span>
-                        <strong data-field="kmaTemp" th:text="${dailyWeathers[1].kmaTemp}">26</strong><span class="wl-deg">℃</span>
+                        <strong data-field="kmaTemp">—</strong><span class="wl-deg">℃</span>
                         <span class="wl-kma-tag">기상청</span>
                     </p>
+                    <p class="wl-comparison-time" data-field="comparisonTime" aria-live="polite">예보를 불러오는 중</p>
                 </article>
                 <article class="wl-mini-card" data-day="dayafter">
                     <p class="wl-mini-title" th:text="${dailyWeathers[2].dayTag}">모레</p>
                     <p class="wl-mini-temp">
-                        <strong data-field="aiTemp" th:text="${dailyWeathers[2].temperature}">27</strong><span class="wl-deg">℃</span>
+                        <strong data-field="aiTemp">—</strong><span class="wl-deg">℃</span>
                         <span class="wl-sep">/</span>
-                        <strong data-field="kmaTemp" th:text="${dailyWeathers[2].kmaTemp}">27</strong><span class="wl-deg">℃</span>
+                        <strong data-field="kmaTemp">—</strong><span class="wl-deg">℃</span>
                         <span class="wl-kma-tag">기상청</span>
                     </p>
+                    <p class="wl-comparison-time" data-field="comparisonTime" aria-live="polite">예보를 불러오는 중</p>
                 </article>
             </div>
         </div>
@@ -74,22 +77,20 @@
         <aside class="wl-discomfort-card">
             <div class="wl-discomfort-head">
                 <p class="wl-discomfort-title">불쾌지수</p>
-                <small class="wl-discomfort-date" data-field="discomfortDate">오늘 (07월 12일)</small>
+                <small class="wl-discomfort-date" data-field="discomfortDate">오늘</small>
             </div>
-            <p class="wl-discomfort-level" data-field="discomfortLevel">보통</p>
 
             <div class="wl-thermometer">
                 <div class="wl-thermometer-track">
                     <img class="wl-thermometer-marker" data-field="discomfortMarker"
-                         th:src="@{'/image/icon/expressions_color/' + (${dailyWeathers[0].discomfortIndex} < 68 ? '01-comfortable.png' : (${dailyWeathers[0].discomfortIndex} < 75 ? '02-slight-discomfort.png' : (${dailyWeathers[0].discomfortIndex} < 80 ? '03-uncomfortable.png' : '04-very-uncomfortable.png')))}"
-                         alt="불쾌지수 위치"
-                         th:style="|bottom: ${dailyWeathers[0].discomfortIndex}%|">
+                         th:src="@{/image/icon/bag.svg}" alt="불쾌지수 위치"
+                         hidden>
                 </div>
                 <div class="wl-thermometer-bulb"></div>
             </div>
 
             <p class="wl-discomfort-value">
-                <strong data-field="discomfortIndex" th:text="${dailyWeathers[0].discomfortIndex}">78</strong>
+                <strong data-field="discomfortIndex">—</strong>
             </p>
         </aside>
     </div>

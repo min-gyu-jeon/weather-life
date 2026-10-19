@@ -81,6 +81,17 @@
 .wl-today-temp .wl-sep { font-size: 22px; color: var(--c-text-sub); margin: 0 4px; }
 .wl-today-temp .wl-kma-tag { font-size: 13px; color: var(--c-text-sub); margin-left: 2px; }
 
+/* 두 온도의 실제 비교 시각. 다른 날짜를 선택한 경우 날짜도 함께 표시합니다. */
+.wl-comparison-time {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--c-text-sub);
+    text-align: center;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
 /* 내일 / 모레 카드: 왼쪽 칸 높이의 나머지 1/3을 차지 */
 .wl-mini-cards {
     flex: 1 1 0;
@@ -166,6 +177,9 @@
     height: 39px;
     transform: translate(-50%, 50%);
 }
+
+/* common.css의 img { display: block }보다 우선하여 미수신 마커를 숨깁니다. */
+.wl-thermometer-marker[hidden] { display: none; }
 
 .wl-discomfort-value { font-size: 15px; font-weight: 600; }
 .wl-discomfort-value strong { font-size: 32px; margin-left: 6px; }
