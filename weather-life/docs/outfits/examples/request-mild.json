@@ -1,0 +1,8 @@
+{
+  "temperature": 20,
+  "humidity": 50,
+  "sky": "CLOUDY",
+  "gender": "FEMALE",
+  "date": "2026-10-15",
+  "seed": 42
+}

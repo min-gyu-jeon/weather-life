@@ -1,0 +1,193 @@
+/* ===== 오늘의 날씨 ===== */
+.wl-today-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.wl-today-main {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* 오늘 카드: 왼쪽 칸 높이의 2/3을 차지. 날짜 영역은 상단 고정, 나머지(온도)는 남은 공간에서 세로 가운데 정렬 */
+.wl-today-card {
+    flex: 2 1 0;
+    display: flex;
+    flex-direction: column;
+    background: #eef6ff;
+    border: 2px solid #9cc7f5;
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    box-shadow: 0 8px 22px rgba(59, 130, 246, 0.14);
+}
+
+.wl-day-head {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.wl-day-head-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 오늘 칸 안에 들어가는 지역 선택: 헤더보다 살짝 작게 */
+.wl-today-select {
+    height: 38px;
+    padding: 0 12px;
+    font-size: 14px;
+}
+.wl-today-select .wl-select-icon { width: 18px; height: 18px; }
+.wl-today-select .wl-select-arrow { width: 14px; height: 14px; }
+
+.wl-today-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.wl-day-date { font-size: 18px; font-weight: 700; }
+.wl-day-tag {
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: var(--c-primary);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.wl-today-label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--c-text-sub);
+    text-align: center;
+}
+
+.wl-today-temp {
+    margin-top: 4px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+}
+.wl-today-temp strong { font-size: 74px; font-weight: 800; line-height: 1; }
+.wl-today-temp .wl-deg { font-size: 16px; font-weight: 700; }
+.wl-today-temp .wl-sep { font-size: 22px; color: var(--c-text-sub); margin: 0 4px; }
+.wl-today-temp .wl-kma-tag { font-size: 13px; color: var(--c-text-sub); margin-left: 2px; }
+
+/* 두 온도의 실제 비교 시각. 다른 날짜를 선택한 경우 날짜도 함께 표시합니다. */
+.wl-comparison-time {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--c-text-sub);
+    text-align: center;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+/* 내일 / 모레 카드: 왼쪽 칸 높이의 나머지 1/3을 차지 */
+.wl-mini-cards {
+    flex: 1 1 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+.wl-mini-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    text-align: center;
+}
+.wl-mini-title { font-size: 15px; font-weight: 600; color: var(--c-text-sub); margin-bottom: 8px; }
+.wl-mini-temp { display: flex; align-items: baseline; justify-content: center; gap: 4px; flex-wrap: wrap; }
+.wl-mini-temp strong { font-size: 24px; font-weight: 800; }
+.wl-mini-temp .wl-deg { font-size: 14px; font-weight: 700; }
+.wl-mini-temp .wl-sep { font-size: 18px; color: var(--c-text-sub); margin: 0 2px; }
+.wl-mini-temp .wl-kma-tag { font-size: 12px; color: var(--c-text-sub); margin-left: 2px; }
+
+/* 불쾌지수: 왼쪽 전체 높이(오늘 카드 + 내일/모레)에 맞춰 늘어남 */
+.wl-discomfort-card {
+    height: 100%;
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.wl-discomfort-head {
+    align-self: flex-start;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+.wl-discomfort-title { font-size: 16px; font-weight: 700; }
+.wl-discomfort-date { font-size: 12px; color: var(--c-text-sub); }
+
+.wl-thermometer {
+    position: relative;
+    width: 90px;
+    flex: 1;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+.wl-thermometer-track {
+    position: relative;
+    width: 24px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #f05a6b 0%, #ff8a3d 38%, #ffd65a 62%, #3cc47c 100%);
+    box-shadow: inset 0 0 0 6px #eef3fb;
+}
+.wl-thermometer-bulb {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #3cc47c;
+    box-shadow: inset 0 0 0 6px #eef3fb;
+    transform: translateX(-50%);
+}
+.wl-thermometer-marker {
+    position: absolute;
+    left: 50%;
+    width: 39px;
+    height: 39px;
+    transform: translate(-50%, 50%);
+}
+
+/* common.css의 img { display: block }보다 우선하여 미수신 마커를 숨깁니다. */
+.wl-thermometer-marker[hidden] { display: none; }
+
+.wl-discomfort-value { font-size: 15px; font-weight: 600; text-align: center; }
+.wl-discomfort-value strong { font-size: 32px; margin-left: 6px; }
+.wl-discomfort-value .wl-discomfort-level {
+    margin-left: 5px;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--c-text-sub);
+}
+
+@media (max-width: 860px) {
+    .wl-today-grid { grid-template-columns: 1fr; }
+    .wl-discomfort-card { height: auto; }
+}
+@media (max-width: 600px) {
+    .wl-mini-cards { grid-template-columns: 1fr; }
+}

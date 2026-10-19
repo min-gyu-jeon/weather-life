@@ -1,0 +1,8 @@
+{
+  "temperature": -5,
+  "humidity": 60,
+  "precipitation": "SNOW",
+  "gender": "MALE",
+  "date": "2026-01-15",
+  "seed": 42
+}

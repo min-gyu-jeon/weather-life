@@ -1,0 +1,68 @@
+{
+  "catalog": {
+    "clothes": 56,
+    "fixedSets": 36,
+    "accessories": 19
+  },
+  "verification": "Gradle test + bootJar passed",
+  "tests": {
+    "tests": 29,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "suite": "com.weatherlife.DiscomfortIndexCalculatorTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.weatherlife.OutfitApiTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.weatherlife.SeoulDistrictAndRetentionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.weatherlife.ShortForecastOutfitMapperTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.weatherlife.TodayOutfitApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.weatherlife.WeatherCollectionServiceTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "com.weatherlife.WeatherLifeApplicationTests",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "weatherMatrixRequests": 72,
+  "imagesIncluded": false,
+  "liveKmaOrProductionDatabaseTested": false
+}

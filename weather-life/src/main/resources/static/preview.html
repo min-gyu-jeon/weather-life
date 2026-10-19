@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Life</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/season-theme.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 상단 헤더 -->
+    <header class="header">
+        <h1>🌸 Weather Life</h1>
+        <div class="header-controls">
+    <!-- 서울특별시 고정 -->
+    <span class="fixed-city">📍 서울특별시</span>
+
+    <!-- 서울 25개 자치구 선택 -->
+    <select id="districtSelect" aria-label="서울 자치구 선택">
+        <option value="강남구">강남구</option>
+        <option value="강동구">강동구</option>
+        <option value="강북구">강북구</option>
+        <option value="강서구">강서구</option>
+        <option value="관악구">관악구</option>
+        <option value="광진구">광진구</option>
+        <option value="구로구">구로구</option>
+        <option value="금천구">금천구</option>
+        <option value="노원구">노원구</option>
+        <option value="도봉구">도봉구</option>
+        <option value="동대문구">동대문구</option>
+        <option value="동작구">동작구</option>
+        <option value="마포구">마포구</option>
+        <option value="서대문구">서대문구</option>
+        <option value="서초구">서초구</option>
+        <option value="성동구">성동구</option>
+        <option value="성북구">성북구</option>
+        <option value="송파구">송파구</option>
+        <option value="양천구">양천구</option>
+        <option value="영등포구" selected>영등포구</option>
+        <option value="용산구">용산구</option>
+        <option value="은평구">은평구</option>
+        <option value="종로구">종로구</option>
+        <option value="중구">중구</option>
+        <option value="중랑구">중랑구</option>
+    </select>
+
+    <!-- 오늘 날짜 고정 표시 -->
+    <span id="todayDisplay" class="fixed-info"></span>
+
+    <!-- 오늘 기준 계절 고정 표시 -->
+    <span id="seasonDisplay" class="fixed-info"></span>
+
+</div>
+
+    </header>
+
+    <main>
+
+        <!-- 1. 오늘 / 내일 / 모레 날씨 -->
+        <section class="weather-section">
+            <h2 class="section-title">오늘의 날씨</h2>
+
+            <div class="weather-grid">
+
+                <!-- 오늘 -->
+                <article class="daily-weather-card">
+                    <h3>오늘</h3>
+                    <p class="weather-date">날짜 표시 예정</p>
+
+                    <div class="weather-icon">☀️</div>
+                    <strong class="temperature">22°C</strong>
+                    <p class="weather-description">맑음</p>
+                    <p class="temperature-range">최고 24°C / 최저 15°C</p>
+
+                    <div class="forecast-comparison">
+                        <p>기상청 예보: 맑음</p>
+                        <p>AI 예측: 연결 예정</p>
+                    </div>
+
+                    <div class="weather-character">
+                        캐릭터 이미지 영역
+                    </div>
+
+                    <div class="discomfort-index">
+                        <h4>불쾌지수 <span>65</span></h4>
+                        <div class="index-gauge">
+                            <span class="gauge-face">🙂</span>
+                        </div>
+                        <p>쾌적한 편이에요</p>
+                    </div>
+                </article>
+
+                <!-- 내일 -->
+                <article class="daily-weather-card">
+                    <h3>내일</h3>
+                    <p class="weather-date">날짜 표시 예정</p>
+
+                    <div class="weather-icon">🌤️</div>
+                    <strong class="temperature">20°C</strong>
+                    <p class="weather-description">구름 조금</p>
+                    <p class="temperature-range">최고 23°C / 최저 14°C</p>
+
+                    <div class="forecast-comparison">
+                        <p>기상청 예보: 구름 조금</p>
+                        <p>AI 예측: 연결 예정</p>
+                    </div>
+
+                    <div class="weather-character">
+                        캐릭터 이미지 영역
+                    </div>
+
+                    <div class="discomfort-index">
+                        <h4>불쾌지수 <span>62</span></h4>
+                        <div class="index-gauge">
+                            <span class="gauge-face">🙂</span>
+                        </div>
+                        <p>쾌적한 편이에요</p>
+                    </div>
+                </article>
+
+                <!-- 모레 -->
+                <article class="daily-weather-card">
+                    <h3>모레</h3>
+                    <p class="weather-date">날짜 표시 예정</p>
+
+                    <div class="weather-icon">🌧️</div>
+                    <strong class="temperature">18°C</strong>
+                    <p class="weather-description">비</p>
+                    <p class="temperature-range">최고 20°C / 최저 13°C</p>
+
+                    <div class="forecast-comparison">
+                        <p>기상청 예보: 비</p>
+                        <p>AI 예측: 연결 예정</p>
+                    </div>
+
+                    <div class="weather-character">
+                        캐릭터 이미지 영역
+                    </div>
+
+                    <div class="discomfort-index">
+                        <h4>불쾌지수 <span>70</span></h4>
+                        <div class="index-gauge">
+                            <span class="gauge-face">😐</span>
+                        </div>
+                        <p>조금 불편할 수 있어요</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 2. AI 생활 정보 -->
+        <section class="lifestyle-section">
+            <h2 class="section-title">AI가 알려주는 오늘의 생활 정보</h2>
+
+            <div class="lifestyle-grid">
+
+                <!-- 추천 복장 -->
+                <article class="lifestyle-card outfit-card">
+                    <h3>👕 오늘의 추천 복장</h3>
+
+                    <div class="outfit-character">
+                        추천 복장 캐릭터 이미지
+                    </div>
+
+                    <p>가벼운 겉옷을 준비해 보세요.</p>
+
+                    <div class="outfit-items">
+                        <span>👕 상의</span>
+                        <span>👖 하의</span>
+                        <span>👟 신발</span>
+                    </div>
+                </article>
+
+                <!-- 추천 운동 -->
+                <article class="lifestyle-card activity-card">
+                    <h3>🏃 오늘의 추천 운동</h3>
+
+                    <div class="activity-character">
+                        추천 운동 캐릭터 이미지
+                    </div>
+
+                    <p>가벼운 야외 운동을 추천해요.</p>
+
+                    <div class="activity-items">
+                        <span>🚶 산책</span>
+                        <span>🚴 자전거</span>
+                        <span>🏃 조깅</span>
+                    </div>
+                </article>
+
+                <!-- 외출 준비물 + 빨래 -->
+                <div class="side-info-column">
+
+                    <article class="lifestyle-card essentials-card">
+                        <h3>🎒 외출 준비물</h3>
+
+                        <div class="essential-items">
+                            <span>🧴 선크림</span>
+                            <span>🕶️ 선글라스</span>
+                            <span>💧 물</span>
+                        </div>
+                    </article>
+
+                    <article class="lifestyle-card laundry-card">
+                        <h3>🧺 빨래 건조지수</h3>
+
+                        <strong class="laundry-score">80점</strong>
+                        <div class="laundry-progress">
+                            <div class="laundry-progress-fill"></div>
+                        </div>
+                        <p>빨래하기 좋은 날이에요!</p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 하단 기상 지표 -->
+        <section class="weather-indicators">
+
+            <article class="indicator-card">
+                <h3>☀️ 자외선 지수</h3>
+                <div class="indicator-gauge">6</div>
+                <p>높음</p>
+            </article>
+
+            <article class="indicator-card">
+                <h3>🌫️ 미세먼지</h3>
+                <div class="indicator-gauge">35</div>
+                <p>보통</p>
+            </article>
+
+            <article class="indicator-card">
+                <h3>☔ 강수확률</h3>
+                <div class="indicator-gauge">20%</div>
+                <p>낮음</p>
+            </article>
+
+            <article class="indicator-card">
+                <h3>💨 바람 세기</h3>
+                <div class="indicator-gauge">3m/s</div>
+                <p>약한 바람</p>
+            </article>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

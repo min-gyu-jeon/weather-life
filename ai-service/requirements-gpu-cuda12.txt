@@ -1,0 +1,3 @@
+# For a CUDA 12.8+ / cuDNN 9 environment; see the official ORT compatibility table.
+# Do not install alongside the CPU onnxruntime package.
+onnxruntime-gpu[cuda,cudnn]>=1.21,<1.27

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather Life UI 목업</title>
+  <!-- M35 (2026-10-15): 예시 날씨를 기준 JSON으로 고르고 완성된 그림 파일을 표시하는 목업. -->
+  <style>
+    :root { color-scheme: light; font-family: system-ui, "Malgun Gothic", sans-serif; color: #263b52; background: #edf3f8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .page { width: min(100%, 820px); min-height: 100vh; margin: auto; padding: 28px 24px 40px; background: #f8fbfe; box-shadow: 0 12px 40px #30496618; }
+    header { max-width: 700px; margin: 0 auto 16px; display: grid; gap: 10px; }
+    .brand { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .eyebrow { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .13em; color: #6283a3; }
+    h1 { margin: 0; font-size: 25px; letter-spacing: -.04em; }
+    .mock { font-size: 11px; color: #7a8ea2; border: 1px solid #d9e7f2; border-radius: 999px; padding: 3px 10px; background: #fff; }
+    .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .switch { display: inline-flex; padding: 3px; gap: 2px; border-radius: 11px; background: #e3edf6; }
+    .switch button, .chips button { border: 0; border-radius: 8px; padding: 7px 13px; font: 700 12px system-ui, "Malgun Gothic", sans-serif; background: transparent; color: #46627e; cursor: pointer; }
+    .switch button[aria-pressed="true"] { color: #fff; background: #365c80; box-shadow: 0 1px 4px #34495d33; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chips button { background: #fff; border: 1px solid #d9e7f2; border-radius: 999px; padding: 5px 11px; font-weight: 600; }
+    .chips button[aria-pressed="true"] { background: #e4effa; border-color: #365c80; color: #23415f; }
+    button:focus-visible { outline: 2px solid #365c80; outline-offset: 2px; }
+    .di-control { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; }
+    .di-control output { min-width: 63px; }
+    .di-control input { width: 152px; margin: 0; cursor: pointer; }
+
+    .calendar { width: min(100%, 700px); margin: 0 auto 18px; padding: 18px 21px 21px; border: 1px solid #d9e7f2; border-radius: 20px; background: linear-gradient(160deg,#fff,#ecf5fc); box-shadow: 0 8px 24px #3855750a; }
+    .cal-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    .cal-head strong { display: block; font-size: 15px; }
+    .cal-head small { color: #7a91a6; font-size: 11px; }
+    .today { display: flex; align-items: baseline; gap: 8px; }
+    .today b { font-size: 30px; letter-spacing: -.04em; }
+    .today span { font-size: 13px; color: #4b6680; }
+    .days { display: grid; grid-template-columns: repeat(7,1fr); gap: 8px; }
+    .days div { height: 54px; border-radius: 9px; background: #e6eff7; padding: 5px 6px; font-size: 10px; color: #6e86a0; }
+    .days div.on { background: #365c80; color: #fff; }
+    .days div b { display: block; font-size: 13px; color: inherit; }
+
+    .middle { display: flex; justify-content: center; align-items: stretch; gap: 8px; margin-bottom: 12px; }
+    /* 10-15 동업자 「UI박스 있으면 좋을 듯 과하지않으면서 분리되어 보이게끔 사각형으로」 (스크린샷 207) →
+       추천 복장+착장 구성 / 추천 액티비티 / 불쾌지수 / 소품 / 빨래 를 각각 흰 사각 패널로 묶음 */
+    .panel { display: flex; gap: 8px; padding: 8px; border: 1px solid #b7d6ef; border-radius: 10px; background: #e6f2fc; box-shadow: 0 2px 8px #2f6a9a1a; }   /* 10-15 동업자 「색상이 너무 연한데 살짝 하늘색이면 좋음」 */
+    .panel .character-card { border-radius: 8px; box-shadow: none; }
+    .panel .outfit-pieces { border-radius: 8px; }
+    .panel .thermometer { border: 0; box-shadow: none; border-radius: 8px; }
+    .character-card { position: relative; width: 224px; height: 224px; flex: 0 0 224px; overflow: hidden; border: 1px solid #d9e7f2; border-radius: 17px; background: #eff6fb; box-shadow: 0 7px 19px #38557513; }
+    .character-card img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+    .character-card .label { position: absolute; top: 8px; left: 8px; z-index: 3; padding: 5px 8px; border-radius: 7px; background: #fffffff0; color: #294159; font-size: 12px; font-weight: 800; box-shadow: 0 1px 4px #35506c1a; }
+    .character-card .caption { position: absolute; left: 8px; right: 8px; bottom: 8px; z-index: 3; padding: 4px 8px; border-radius: 7px; background: #ffffffe6; font-size: 11px; color: #3c556e; text-align: center; }
+    .empty-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: repeating-linear-gradient(135deg,#f3f8fc 0 10px,#eaf2f9 10px 20px); color: #8ba0b4; font-size: 12px; }
+    .empty-card .label { position: absolute; }
+    .outfit-pieces { width: 100px; height: 224px; flex: 0 0 100px; padding: 8px 6px; border: 1px solid #d9e7f2; border-radius: 15px; background: #fff; display: flex; flex-direction: column; }
+    .outfit-pieces strong { font-size: 11px; text-align: center; margin-bottom: 2px; }
+    .outfit-piece { flex: 1; min-height: 0; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #edf2f6; }
+    .outfit-piece:last-child { border-bottom: 0; }
+    .outfit-piece img { width: 36px; height: 36px; flex: 0 0 36px; }
+    .outfit-piece span { font-size: 10.5px; line-height: 1.25; color: #3f566c; word-break: keep-all; }
+    /* 10-15 동업자 「허공에 캐릭터가 띄워져있어서 … 박스안에 잇는 느낌으로 … UI창」 → 온도계 + 스티커를 다른 칸과 같은 카드 안에 */
+    .thermometer { --liquid: #4cba78; width: 140px; height: 224px; flex: 0 0 140px; position: relative; box-sizing: border-box;
+      border: 1px solid #d9e7f2; border-radius: 17px; background: linear-gradient(180deg,#ffffff,#f4f9fd); box-shadow: 0 7px 19px #38557513; overflow: hidden; }
+    .thermo-title { position: absolute; top: 8px; left: 8px; z-index: 3; padding: 5px 8px; border-radius: 7px; background: #fffffff0; color: #294159; font-size: 12px; font-weight: 800; box-shadow: 0 1px 4px #35506c1a; }
+    .thermo-scale { position: absolute; top: 44px; bottom: 34px; left: 6px; width: 25px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; color: #788da1; font-size: 8px; font-weight: 700; }
+    .thermo-scale span { position: relative; line-height: 1; }
+    .thermo-scale span::after { content: ""; position: absolute; top: 50%; left: calc(100% + 2px); width: 6px; border-top: 1px solid #91a4b5; }
+    .thermo-tube { position: absolute; top: 42px; left: 37px; bottom: 30px; width: 13px; overflow: hidden; border: 2px solid #6b8296; border-radius: 9px 9px 4px 4px; background: #fff; box-shadow: inset 2px 0 #e5edf3; }
+    .thermo-fill { position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: var(--liquid); transition: height .25s ease, background-color .25s ease; }
+    .thermo-bulb { position: absolute; left: 30px; bottom: 10px; z-index: 2; width: 27px; height: 27px; border: 2px solid #6b8296; border-radius: 50%; background: var(--liquid); box-shadow: inset 0 0 0 3px #f8fbfe; transition: background-color .25s ease; }
+    .thermo-sticker { position: absolute; top: 58px; left: 48px; z-index: 4; width: 88px; height: 88px; object-fit: contain; pointer-events: none;
+      border-radius: 50%; background: radial-gradient(circle at 50% 55%, #eaf3fa 0 62%, transparent 63%); }
+    .thermo-sticker-label { position: absolute; top: 154px; left: 46px; width: 92px; text-align: center; font-size: 10px; line-height: 1.3; font-weight: 700; color: #46627e; word-break: keep-all; }
+    .lower { width: min(100%, 766px); display: flex; justify-content: center; gap: 8px; margin: auto; }
+    .small-card { flex: 1; min-height: 98px; padding: 14px; border: 1px solid #b7d6ef; border-radius: 10px; background: #e6f2fc; box-shadow: 0 2px 8px #2f6a9a1a; }
+    .small-card strong { display: block; font-size: 12px; }
+    .placeholder { margin: 12px 0 0; font-size: 11px; color: #90a1b2; }
+    .acc-card { flex: 1.6; }
+    .acc-card small { font-weight: 400; color: #7a91a6; margin-left: 4px; }
+    .accs { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-top: 8px; }
+    .acc { width: 58px; text-align: center; font-size: 10.5px; color: #3f566c; line-height: 1.25; word-break: keep-all; }
+    .acc img { width: 40px; height: 40px; display: block; margin: 0 auto 2px; }
+    .acc-none { font-size: 11px; color: #90a1b2; margin: 8px 0 0; }
+    .laundry-card { display: flex; align-items: center; gap: 10px; }
+    .laundry-card img { width: 86px; height: 86px; flex: 0 0 86px; object-fit: cover; border-radius: 10px; }
+    .laundry-card small { display: block; margin-top: 7px; font-size: 11px; font-weight: 400; color: #5b7288; }
+    details { width: min(100%, 700px); margin: 18px auto 0; font-size: 12px; color: #4b6680; }
+    details textarea { width: 100%; height: 150px; font: 11.5px/1.4 Consolas, monospace; border: 1px solid #d9e7f2; border-radius: 8px; padding: 8px; }
+    details button { margin-top: 6px; border: 1px solid #365c80; background: #365c80; color: #fff; border-radius: 8px; padding: 6px 12px; font: 700 12px system-ui, "Malgun Gothic", sans-serif; cursor: pointer; }
+    .err { color: #c0453f; }
+    footer { max-width: 700px; margin: 16px auto 0; color: #74899c; font-size: 11px; }
+    @media (max-width: 780px) {
+      .page { padding-inline: 14px; } .middle { gap: 6px; flex-wrap: wrap; }
+      .character-card { width: min(42vw,224px); height: min(42vw,224px); flex-basis: min(42vw,224px); }
+      .outfit-pieces { height: min(42vw,224px); width: 96px; flex-basis: 96px; } .thermometer { height: min(42vw,224px); }
+      .lower { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="brand">
+        <div><p class="eyebrow">WEATHER LIFE</p><h1>오늘의 날씨와 옷차림</h1></div>
+        <span class="mock">UI 목업 · 예시 데이터</span>
+      </div>
+      <div class="controls">
+        <div class="switch" role="group" aria-label="캐릭터 성별">
+          <button id="gF" type="button" aria-pressed="true">여자</button>
+          <button id="gM" type="button" aria-pressed="false">남자</button>
+        </div>
+        <label class="di-control" for="diSlider">불쾌지수 <output id="diReadout">40 · 쾌적</output><input id="diSlider" type="range" min="1" max="100" value="40"></label>
+      </div>
+      <small id="rulesStatus" aria-live="polite">기준표 불러오는 중…</small>
+      <div class="chips" id="scenarios" role="group" aria-label="예시 날씨 (백엔드 결과 예시)"></div>
+    </header>
+
+    <section class="calendar" aria-label="날씨 캘린더">
+      <div class="cal-head">
+        <div><strong>날씨 캘린더</strong><small id="calNote">서울 · 예시 데이터</small></div>
+        <div class="today"><b id="tempNow">16℃</b><span id="skyNow">맑음</span></div>
+      </div>
+      <div class="days" id="days" aria-hidden="true"></div>
+    </section>
+
+    <div class="middle">
+      <div class="panel" aria-label="오늘의 옷차림">
+      <section class="character-card" id="outfitCard" aria-label="추천 복장">
+        <img id="outfitImg" alt="">
+        <span class="label">추천 복장</span>
+        <span class="caption" id="outfitCaption"></span>
+      </section>
+      <aside class="outfit-pieces" aria-label="착장 구성">
+        <strong>착장 구성</strong>
+        <div id="pieces" style="display:contents"></div>
+      </aside>
+      </div>
+      <div class="panel">
+      <section class="character-card empty-card" id="actCard" aria-label="추천 액티비티">
+        <span class="label" style="top:8px;left:8px">추천 액티비티</span>
+        <span id="actEmpty">아직 제작 전</span>
+      </section>
+      </div>
+      <div class="panel">
+      <div class="thermometer" id="thermometer" role="img" aria-label="불쾌지수 40, 쾌적">
+        <span class="thermo-title" aria-hidden="true">불쾌지수</span>
+        <div class="thermo-scale" aria-hidden="true"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+        <div class="thermo-tube" aria-hidden="true"><div class="thermo-fill" id="thermoFill"></div></div>
+        <div class="thermo-bulb" aria-hidden="true"></div>
+        <img class="thermo-sticker" id="stickerImg" alt="" hidden>
+        <span class="thermo-sticker-label" id="stickerLabel" hidden></span>
+      </div>
+      </div>
+    </div>
+    <div class="lower">
+      <section class="small-card acc-card" aria-label="오늘 챙길 소품"><strong>소품 <small>오늘 챙기면 좋은 것</small></strong><div class="accs" id="accs"></div></section>
+      <section class="small-card laundry-card" aria-label="빨래 상태"><img id="laundryImg" alt="" hidden><div><strong>빨래</strong><small id="laundryCaption">아직 제작 전</small></div></section>
+    </div>
+
+    <details>
+      <summary>백엔드 결과(JSON) 직접 넣어 보기</summary>
+      <textarea id="api" spellcheck="false"></textarea>
+      <button id="apiGo" type="button">화면에 적용</button> <span id="apiErr" class="err"></span>
+    </details>
+    <footer>PC 웹 · 세로형 화면 시안 · 캐릭터 카드 224×224 CSS px (원본 340×340) · 기준표가 완성 그림 파일을 고름</footer>
+  </main>
+
+  <script src="../../static/weather/outfits/outfit_visual_map.js"></script>
+  <script src="../../static/weather/outfits/outfit_visual.js"></script>
+  <!-- 기준표: 더블클릭(file://)으로 열어도 읽히도록 JS로 불러옴 (10-15 Claude · 원본 JSON → make_rules_js.py) -->
+  <script src="../../static/weather/rules/weather_character_rules.js"></script>
+  <script src="../../static/weather/rules/pick_example.js"></script>
+  <script>
+    const MAP = window.OUTFIT_VISUAL_MAP, BASE = "../../static/weather/outfits/";
+    const it = id => id ? { id, name: MAP.items[id].name, slot: MAP.items[id].slot } : null;
+    const outfit = (top, bottom, outer, shoes, extra = {}) => Object.assign(
+      { top: it(top), bottom: it(bottom), onePiece: null, innerTop: null, outer: it(outer), outerUsage: outer ? "WEAR" : null,
+        baseLayer: null, shoes: it(shoes), accessories: [] }, extra);
+    // 예시 = 백엔드가 줄 결과를 흉내 낸 것 (날씨·불쾌지수·옷)
+    // w = 소품 고르기용 날씨 값 (pty 강수형태 · pop 강수확률 · precip 강수량 · humidity 습도 · wind 풍속 · pm 미세먼지 — 팀 자료 없음, 예시)
+    const SCENARIOS = [
+      { name: "선선한 가을", month: 10, temp: 16, sky: "맑음", di: 40, w: { tempMin: 8, tempMax: 21, humidity: 45, wind: 2 }, F: outfit("C008","C034",null,"C138"), M: outfit("C017","C033",null,"C138") },
+      { name: "한여름", month: 8, temp: 33, sky: "맑음", di: 84, w: { tempMin: 25, tempMax: 34, humidity: 65, wind: 1 }, F: outfit("C002","C037",null,"C137"), M: outfit("C001","C029",null,"C138") },
+      { name: "여름 출근", month: 7, temp: 29, sky: "구름 많음", di: 77, occasion: "출근", w: { tempMin: 24, tempMax: 31, humidity: 75, pop: 40, wind: 2 }, F: outfit("C076","C040",null,"C139"), M: outfit("C003","C040",null,"C139") },
+      { name: "장마", month: 7, temp: 26, sky: "흐림", pty: "비", di: 79, w: { tempMin: 23, tempMax: 27, humidity: 92, pop: 90, precip: 25, wind: 4 }, F: outfit("C001","C029","C134","C141"), M: outfit("C001","C028","C134","C141") },
+      { name: "운동", month: 6, temp: 27, sky: "맑음", di: 72, occasion: "운동", w: { tempMin: 20, tempMax: 28, humidity: 55, wind: 2 }, F: outfit("C143","C149",null,"C137"), M: outfit("C143","C149",null,"C137") },
+      { name: "봄 나들이", month: 4, temp: 18, sky: "맑음", di: 55, w: { tempMin: 9, tempMax: 21, humidity: 40, wind: 3 }, F: outfit(null,null,"C120","C138",{ onePiece: it("C111") }), M: outfit("C001","C044","C054","C138") },
+      { name: "황사", month: 4, temp: 17, sky: "흐림", di: 52, pm: "나쁨", w: { tempMin: 10, tempMax: 19, humidity: 30, wind: 6 }, F: outfit("C001","C045","C122","C138"), M: outfit("C001","C045","C051","C138") },
+      { name: "봄비", month: 4, temp: 14, sky: "흐림", pty: "비", di: 50, w: { tempMin: 11, tempMax: 15, humidity: 85, pop: 70, precip: 5, wind: 3 }, F: outfit("C008","C033","C135","C141"), M: outfit("C001","C045","C051","C138") },
+      { name: "가을 출근", month: 10, temp: 13, sky: "흐림", di: 45, occasion: "출근", w: { tempMin: 6, tempMax: 17, humidity: 50, wind: 3 }, F: outfit("C012","C094","C053","C139"), M: outfit("C012","C038","C053","C139") },
+      { name: "초겨울", month: 12, temp: 4, sky: "흐림", di: 30, w: { tempMin: -1, tempMax: 7, humidity: 40, wind: 6 }, F: outfit("C022","C103","C129","C140"), M: outfit("C025","C043","C062","C140") },
+      { name: "한파", month: 1, temp: -9, sky: "흐림", pty: "눈", di: 18, w: { tempMin: -13, tempMax: -5, humidity: 30, precip: 2, wind: 9 }, F: outfit("C019","C036","C067","C142"), M: outfit("C019","C036","C066","C142") },
+      { name: "겨울 주말", month: 1, temp: -2, sky: "맑음", di: 25, w: { tempMin: -6, tempMax: 2, humidity: 45, wind: 3 }, F: outfit("C022","C103","C129","C140"), M: outfit("C025","C043","C062","C140") },
+      { name: "여름 천둥", month: 7, temp: 29, sky: "흐림", pty: "뇌우", di: 81, w: { tempMin: 25, tempMax: 31, humidity: 90, pop: 95, precip: 18, wind: 6 }, F: outfit("C001","C029","C134","C141"), M: outfit("C001","C028","C134","C141") },
+      { name: "4월 30℃", month: 4, temp: 30, sky: "맑음", di: 80, w: { tempMin: 19, tempMax: 31, humidity: 45, wind: 2 }, F: outfit("C002","C037",null,"C137"), M: outfit("C001","C029",null,"C138") },
+    ];
+    let gender = "F", current = SCENARIOS[0], customOutfit = null, RULES = window.WEATHER_CHARACTER_RULES || null, renderToken = 0;
+    const $ = id => document.getElementById(id);
+
+    function stage(v) { return v < 68 ? { name: "쾌적", color: "#4cba78" } : v < 75 ? { name: "보통", color: "#efa54f" } : v < 80 ? { name: "나쁨", color: "#e89453" } : { name: "매우 나쁨", color: "#e76f6a" }; }
+    function setDI(v) {
+      v = Math.max(1, Math.min(100, Number(v))); const s = stage(v);
+      $("diSlider").value = v; $("thermoFill").style.height = v + "%";
+      $("thermometer").style.setProperty("--liquid", s.color);
+      $("diReadout").textContent = `${v} · ${s.name}`; $("diReadout").style.color = s.color; $("diSlider").style.accentColor = s.color;
+      $("thermometer").setAttribute("aria-label", `불쾌지수 ${v}, ${s.name}. 온도계가 ${v}퍼센트 채워짐`);
+    }
+    function renderDays(temp) {
+      const names = ["일","월","화","수","목","금","토"], d = $("days"); d.innerHTML = "";
+      for (let i = 0; i < 14; i++) {
+        const el = document.createElement("div"); if (i === 3) el.className = "on";
+        const t = i === 3 ? temp : Math.round(temp + Math.sin(i * 1.3) * 3 - (i > 3 ? (i - 3) * .3 : 0));   // 수 14 = 오늘
+        el.innerHTML = `${names[i % 7]} ${i + 11}<b>${t}℃</b>`; d.appendChild(el);
+      }
+    }
+    function ruleInput() {
+      return { month: current.month, temp: current.temp, pty: current.pty || "없음",
+        sky: current.sky.replace(/\s/g, ""), di: Number($("diSlider").value),
+        gender, occasion: current.occasion || "일상", uv: current.uv,
+        pm: current.pm || "", humidity: current.w?.humidity };
+    }
+    function iconsForSet(set) {
+      return Object.entries(set.items).map(([slot, id]) => {
+        const item = MAP.items[id], icon = item && MAP.icons[item.icon];
+        return { slot, iconFile: icon?.file, name: item?.short || item?.name || id,
+          fullName: item?.name || id, slotLabel: slot };
+      }).filter(x => x.iconFile);
+    }
+    function showActivity(selection) {
+      const card = $("actCard"), empty = $("actEmpty"), token = ++renderToken;
+      card.querySelectorAll("video").forEach(v => v.remove()); empty.hidden = false;
+      if (!selection) return;
+      const key = selection.activity.key, local = `../../static/weather/activities/activity_${key}_340`;
+      const poster = new Image();
+      poster.onload = () => {
+        if (token !== renderToken) return;
+        const v = document.createElement("video");
+        Object.assign(v, { autoplay: true, muted: true, loop: true, playsInline: true,
+          poster: local + "_poster.png", src: local + ".mp4" });
+        v.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover";
+        v.onerror = () => { if (token === renderToken) { v.remove(); empty.hidden = false; } };
+        card.prepend(v); empty.hidden = true;
+      };
+      poster.onerror = () => { if (token === renderToken) empty.hidden = false; };
+      poster.src = local + "_poster.png";
+    }
+    function showSticker(selection) {
+      const img = $("stickerImg"), label = $("stickerLabel");
+      img.hidden = true; label.hidden = true; img.removeAttribute("src");
+      if (!selection) return;
+      // 우산 · 선글라스는 날씨가 먼저(불쾌지수 막대를 움직여도 안 바뀜) → 이유를 같이 적어 고장으로 보이지 않게 (10-15)
+      const names = { comfort: "쾌적", normal: "보통", bad: "나쁨", very_bad: "매우 나쁨", umbrella: "우산 (비 오는 날)", sunglasses: "선글라스 (햇빛 강함)" };
+      // 10-15: 우산 스티커도 불쾌지수 표정을 따름 (umbrella_comfort … umbrella_very_bad)
+      const k = selection.sticker.key, um = /^umbrella_(.+)$/.exec(k);
+      label.textContent = um ? `우산 · ${names[um[1]] || um[1]}` : (names[k] || k);
+      img.onload = () => { img.hidden = false; label.hidden = false; };
+      img.onerror = () => { img.hidden = true; label.hidden = true; };
+      img.alt = `오늘 날씨 스티커: ${label.textContent}`;
+      img.src = `../../static/weather/stickers/${gender.toLowerCase()}_${selection.sticker.key}.png`;
+    }
+    function showLaundry(selection) {
+      const img = $("laundryImg"), caption = $("laundryCaption");
+      img.hidden = true; img.removeAttribute("src"); caption.textContent = "아직 제작 전";
+      if (!selection) return;
+      const labels = { dry: "잘 마름", damp: "축축함", frozen: "얼어붙음" };
+      img.onload = () => { img.hidden = false; caption.textContent = labels[selection.laundry.key]; };
+      img.onerror = () => { img.hidden = true; caption.textContent = "아직 제작 전"; };
+      img.alt = `빨래: ${labels[selection.laundry.key]}`;
+      img.src = `../../static/weather/laundry/laundry_${selection.laundry.key}.png`;
+    }
+    function render(resetWeather = true) {   // false = 불쾌지수 슬라이더만 움직였을 때 (예시 값으로 되돌리지 않음)
+      const o = customOutfit || current[gender];
+      if (!customOutfit && resetWeather) { $("tempNow").textContent = current.temp + "℃"; $("skyNow").textContent = current.pty ? `${current.sky} · ${current.pty}` : current.sky; renderDays(current.temp); setDI(current.di); }
+      const selection = RULES ? pickWeatherCharacter(ruleInput(), RULES) : null;
+      const set = !customOutfit && selection && MAP.sets[selection.outfit.key];
+      const r = set ? { set, icons: iconsForSet(set) } : pickOutfitVisual(o, gender, MAP);
+      const img = $("outfitImg");
+      img.src = BASE + r.set.poster; img.alt = `추천 복장: ${r.set.label}`;
+      $("outfitCaption").textContent = r.set.label.split("· ").slice(1).join("· ");
+      const box = $("pieces"); box.innerHTML = "";
+      const order = ["outer","top","innerTop","onePiece","bottom","baseLayer","shoes"];
+      r.icons.sort((a, b) => order.indexOf(a.slot) - order.indexOf(b.slot)).slice(0, 5).forEach(x => {
+        const d = document.createElement("div"); d.className = "outfit-piece";
+        const im = document.createElement("img"); im.src = BASE + x.iconFile; im.alt = "";
+        const sp = document.createElement("span"); sp.textContent = x.name + (x.usage && x.usage !== "WEAR" ? " (챙기기)" : "");
+        sp.title = `${x.slotLabel} · ${x.fullName}`; d.append(im, sp); box.appendChild(d);
+      });
+      showActivity(selection); showSticker(selection); showLaundry(selection);
+      // 소품: 날씨 값 + 지금 옷 (기준 초안 = outfit_visual.js pickAccessories)
+      const weather = Object.assign({ temp: current.temp, sky: current.sky, pty: current.pty, di: Number($("diSlider").value), pm: current.pm }, current.w);
+      const accs = pickAccessories(weather, o, MAP), ab = $("accs"); ab.innerHTML = "";   // 기본 3개 · 비/미세먼지 날 4개
+      if (!accs.length) ab.innerHTML = '<p class="acc-none">오늘은 따로 챙길 소품이 없어요</p>';
+      accs.forEach(a => {
+        const d = document.createElement("div"); d.className = "acc"; d.title = a.why;
+        const im = document.createElement("img"); im.src = BASE + a.file; im.alt = "";
+        d.append(im, document.createTextNode(a.label)); ab.appendChild(d);
+      });
+      $("api").value = JSON.stringify({ outfits: [o] }, null, 1);
+    }
+    SCENARIOS.forEach((s, i) => {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = s.name;
+      b.setAttribute("aria-pressed", String(i === 0));
+      b.onclick = () => { current = s; customOutfit = null; document.querySelectorAll("#scenarios button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); render(); };
+      $("scenarios").appendChild(b);
+    });
+    function setGender(g) { gender = g; $("gF").setAttribute("aria-pressed", String(g === "F")); $("gM").setAttribute("aria-pressed", String(g === "M")); customOutfit = null; render(); }
+    $("gF").onclick = () => setGender("F"); $("gM").onclick = () => setGender("M");
+    $("diSlider").addEventListener("input", e => { setDI(e.target.value); render(false); });
+    $("apiGo").onclick = () => {
+      $("apiErr").textContent = "";
+      try {
+        let t = $("api").value.trim(); if (/^"outfits"\s*:/.test(t)) t = "{" + t + "}";
+        let j = JSON.parse(t); if (Array.isArray(j)) j = j[0]; if (j.outfits) j = j.outfits[0];
+        customOutfit = j; render();
+      } catch (e) { $("apiErr").textContent = "JSON을 읽지 못했습니다: " + e.message; }
+    };
+    // 주소 끝 #3 = 4번째 예시로 열기 (캡처·시연용) · #3m = 남자
+    const h = location.hash.slice(1), hi = parseInt(h, 10);
+    if (hi >= 0 && hi < SCENARIOS.length) document.querySelectorAll("#scenarios button")[hi].click();
+    if (/m$/.test(h)) setGender("M"); else render();
+    // 기준표는 위 <script>(weather_character_rules.js)로 이미 들어와 있음. 없을 때만 JSON을 fetch(로컬 서버에서 열었을 때)
+    if (RULES) $("rulesStatus").textContent = "기준표 연결됨 · 완성 그림 파일을 고릅니다";
+    else fetch("../../static/weather/rules/weather_character_rules.json")
+      .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
+      .then(rules => { RULES = rules; $("rulesStatus").textContent = "기준표 연결됨 · 완성 그림 파일을 고릅니다"; render(false); })
+      .catch(error => { $("rulesStatus").textContent = "기준표를 읽지 못했습니다 (weather_character_rules.js 확인)"; console.error(error); });
+  </script>
+</body>
+</html>

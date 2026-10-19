@@ -1,0 +1,9 @@
+# Allow only runtime source and dependency lists into the build context.
+**
+!Dockerfile
+!requirements-api.txt
+!requirements-pipeline.txt
+!requirements-gpu-cuda12.txt
+!stations.csv
+!pangu_service/
+!pangu_service/*.py

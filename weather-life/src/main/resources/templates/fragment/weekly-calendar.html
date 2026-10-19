@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- 주간 날씨 캘린더 -->
+<section class="wl-card wl-weekly" th:fragment="weekly-calendar">
+    <div class="wl-weekly-head">
+        <h2 class="wl-title">
+            <img th:src="@{/image/icon/calendar.svg}" alt="">
+            주간 날씨 캘린더
+        </h2>
+        <button type="button" class="wl-unit-btn">℃</button>
+    </div>
+
+    <ul class="wl-weekly-list">
+        <li th:each="week : ${weeklyWeathers}" th:classappend="${week.today} ? 'is-today'">
+            <span class="wl-weekly-date" th:text="${week.dateLabel}">07. 12 (일)</span>
+            <img th:src="@{${week.weatherIcon}}" alt="날씨 아이콘">
+            <span class="wl-weekly-min" th:text="|${week.minTemp}°|">22°</span>
+            <span class="wl-weekly-max" th:text="|${week.maxTemp}°|">24°</span>
+        </li>
+    </ul>
+</section>
+
+</body>
+</html>

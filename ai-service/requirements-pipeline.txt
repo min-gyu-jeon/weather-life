@@ -1,0 +1,5 @@
+numpy>=1.26,<3
+eccodes>=2.39,<3
+ecmwf-opendata>=0.3.19,<1
+gdown>=5,<6
+tzdata>=2024.1

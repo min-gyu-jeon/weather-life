@@ -1,0 +1,171 @@
+/* ===== AI 생활 정보 ===== */
+.wl-life-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.85fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.wl-life-box {
+    border-radius: var(--radius-md);
+    padding: 16px;
+    overflow: hidden;
+}
+
+.wl-outfit { background: #fff1f2; }
+.wl-exercise { background: #effaf2; }
+.wl-belongings,
+.wl-laundry { background: #eef5ff; }
+
+.wl-life-visual {
+    display: grid;
+    grid-template-columns: 1fr 72px;
+    gap: 10px;
+    margin-bottom: 16px;
+    align-items: start;
+}
+.wl-outfit .wl-life-visual,
+.wl-exercise .wl-life-visual {
+    align-items: center;
+}
+.wl-life-character {
+    display: block;
+    width: 65%;
+    margin: 0 auto;
+    min-width: 0;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.wl-life-headline { font-size: 16px; font-weight: 700; margin-bottom: 6px; text-align: center; }
+.wl-life-desc { font-size: 14px; color: var(--c-text-sub); line-height: 1.6; text-align: center; }
+
+/* 추천 복장 아이템 */
+.wl-outfit-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.wl-outfit-items li {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 10px;
+}
+.wl-outfit-items img { width: 44px; height: 44px; }
+
+/* 추천 운동 옵션 */
+.wl-exercise-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.wl-exercise-options li {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: #fff;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--c-text-sub);
+}
+.wl-exercise-options li.is-selected {
+    border-color: var(--c-green);
+    color: #2a9d5f;
+}
+.wl-exercise-options img { width: 30px; height: 30px; }
+
+/* 외출 준비물 + 빨래 */
+.wl-life-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wl-belongings-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+.wl-belongings-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+.wl-belongings-icon {
+    width: 48%;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 10px;
+}
+.wl-belongings-icon img { width: 65%; height: 65%; object-fit: contain; }
+
+.wl-laundry-image {
+    width: 48%;
+    display: block;
+    margin: 0 auto 14px;
+    border-radius: 10px;
+}
+
+.wl-laundry-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.wl-laundry-bar {
+    flex: 1;
+    height: 16px;
+    border-radius: 999px;
+    background: #dfe6ef;
+    overflow: hidden;
+}
+.wl-laundry-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+}
+.wl-laundry-status strong { font-size: 17px; white-space: nowrap; }
+
+.wl-laundry-status.good .wl-laundry-bar span { background: var(--c-green); }
+.wl-laundry-status.good strong { color: var(--c-green); }
+.wl-laundry-status.normal .wl-laundry-bar span { background: var(--c-orange); }
+.wl-laundry-status.normal strong { color: var(--c-orange); }
+.wl-laundry-status.bad .wl-laundry-bar span { background: linear-gradient(90deg, #ff6b4a, #ffa07a); }
+.wl-laundry-status.bad strong { color: #ff5a3c; }
+
+@media (max-width: 860px) {
+    .wl-life-grid { grid-template-columns: 1fr; }
+}
+.wl-life-character[hidden] {
+    display: none;
+}
+.wl-laundry-image[hidden] {
+    display: none;
+}
+
+.wl-laundry-status {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.wl-laundry-status p {
+    width: 100%;
+    margin: 0;
+    color: var(--c-text-sub);
+    font-size: 12px;
+    line-height: 1.5;
+}

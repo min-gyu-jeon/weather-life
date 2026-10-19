@@ -1,0 +1,111 @@
+/* ===== 공통 ===== */
+:root {
+    --c-primary: #3b82f6;
+    --c-primary-soft: #e8f1ff;
+    --c-text: #1f2a44;
+    --c-text-sub: #6b7a90;
+    --c-border: #e3ebf5;
+    --c-card: rgba(255, 255, 255, 0.88);
+    --c-blue: #3b82f6;
+    --c-green: #3cc47c;
+    --c-red: #f05a6b;
+    --c-orange: #ff8a3d;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --shadow: 0 6px 20px rgba(60, 110, 170, 0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    color: var(--c-text);
+    background: linear-gradient(180deg, #cfe4f7 0%, #e4f0fb 45%, #d3e6f6 100%);
+    min-height: 100vh;
+}
+
+img { display: block; max-width: 100%; }
+ul { list-style: none; }
+button { font: inherit; border: none; background: none; cursor: pointer; }
+
+.wl-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wl-card {
+    background: var(--c-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+
+.wl-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+.wl-title img { width: 30px; height: 30px; }
+
+.wl-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+.wl-subtitle img { width: 26px; height: 26px; }
+
+/* 오늘의 날씨 + 주간 캘린더 2단 배치 */
+.wl-row {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 860px) {
+    .wl-row { grid-template-columns: 1fr; }
+}
+html[data-season="spring"] {
+    --c-primary: #83ad76;
+    --c-primary-soft: #edf5e7;
+    --c-text: #405d43;
+    --c-border: #dce8d5;
+    --season-bg: #f6f9f0;
+}
+
+html[data-season="summer"] {
+    --c-primary: #4196cf;
+    --c-primary-soft: #e4f3ff;
+    --c-text: #315e80;
+    --c-border: #d4e9f8;
+    --season-bg: #edf7ff;
+}
+
+html[data-season="autumn"] {
+    --c-primary: #a67b58;
+    --c-primary-soft: #f5e9da;
+    --c-text: #73533c;
+    --c-border: #eadbca;
+    --season-bg: #faf3e9;
+}
+
+html[data-season="winter"] {
+    --c-primary: #8daec7;
+    --c-primary-soft: #eaf2f8;
+    --c-text: #526d82;
+    --c-border: #dfe8f1;
+    --season-bg: #f5f9fd;
+}
+
+html[data-season] body {
+    background: var(--season-bg);
+}

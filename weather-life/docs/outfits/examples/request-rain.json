@@ -1,0 +1,11 @@
+{
+  "temperature": 26,
+  "humidity": 85,
+  "precipitation": "RAIN",
+  "precipitationProbability": 90,
+  "precipitationAmount": 12,
+  "airQuality": "BAD",
+  "gender": "FEMALE",
+  "date": "2026-10-15",
+  "seed": 42
+}

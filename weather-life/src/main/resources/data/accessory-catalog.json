@@ -1,0 +1,100 @@
+{
+  "version": "2026-10-15-fixed-sets-v2",
+  "items": [
+    {
+      "key": "umbrella",
+      "name": "우산",
+      "iconPath": "/weather/outfits/assets/icons/acc_umbrella.svg"
+    },
+    {
+      "key": "folding_umbrella",
+      "name": "접이식 우산",
+      "iconPath": "/weather/outfits/assets/icons/acc_folding_umbrella.svg"
+    },
+    {
+      "key": "rain_boots",
+      "name": "장화",
+      "iconPath": "/weather/outfits/assets/icons/acc_rain_boots.svg"
+    },
+    {
+      "key": "parasol",
+      "name": "양산",
+      "iconPath": "/weather/outfits/assets/icons/acc_parasol.svg"
+    },
+    {
+      "key": "sunglasses",
+      "name": "선글라스",
+      "iconPath": "/weather/outfits/assets/icons/acc_sunglasses.svg"
+    },
+    {
+      "key": "sunscreen",
+      "name": "선크림",
+      "iconPath": "/weather/outfits/assets/icons/acc_sunscreen.svg"
+    },
+    {
+      "key": "cap",
+      "name": "모자",
+      "iconPath": "/weather/outfits/assets/icons/acc_cap.svg"
+    },
+    {
+      "key": "fan",
+      "name": "휴대용 선풍기",
+      "iconPath": "/weather/outfits/assets/icons/acc_fan.svg"
+    },
+    {
+      "key": "water_bottle",
+      "name": "물병",
+      "iconPath": "/weather/outfits/assets/icons/acc_water_bottle.svg"
+    },
+    {
+      "key": "cool_sleeve",
+      "name": "쿨토시",
+      "iconPath": "/weather/outfits/assets/icons/acc_cool_sleeve.svg"
+    },
+    {
+      "key": "light_outer",
+      "name": "겉옷 챙기기",
+      "iconPath": "/weather/outfits/assets/icons/acc_light_outer.svg"
+    },
+    {
+      "key": "scarf",
+      "name": "목도리",
+      "iconPath": "/weather/outfits/assets/icons/acc_scarf.svg"
+    },
+    {
+      "key": "gloves",
+      "name": "장갑",
+      "iconPath": "/weather/outfits/assets/icons/acc_gloves.svg"
+    },
+    {
+      "key": "beanie",
+      "name": "비니",
+      "iconPath": "/weather/outfits/assets/icons/acc_beanie.svg"
+    },
+    {
+      "key": "earmuffs",
+      "name": "귀마개",
+      "iconPath": "/weather/outfits/assets/icons/acc_earmuffs.svg"
+    },
+    {
+      "key": "hotpack",
+      "name": "핫팩",
+      "iconPath": "/weather/outfits/assets/icons/acc_hotpack.svg"
+    },
+    {
+      "key": "thermos",
+      "name": "보온 텀블러",
+      "iconPath": "/weather/outfits/assets/icons/acc_thermos.svg"
+    },
+    {
+      "key": "lip_balm",
+      "name": "립밤",
+      "iconPath": "/weather/outfits/assets/icons/acc_lip_balm.svg"
+    },
+    {
+      "key": "mask",
+      "name": "KF94 마스크",
+      "iconPath": "/weather/outfits/assets/icons/acc_mask.svg"
+    }
+  ]
+}

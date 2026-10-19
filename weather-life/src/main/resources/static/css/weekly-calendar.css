@@ -1,0 +1,46 @@
+/* ===== 주간 날씨 캘린더 ===== */
+.wl-weekly-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.wl-unit-btn {
+    width: 48px;
+    height: 32px;
+    border: 1.5px solid #8a96a8;
+    border-radius: 999px;
+    font-size: 15px;
+    color: var(--c-text);
+    background: #fff;
+}
+
+.wl-weekly-list li {
+    display: grid;
+    grid-template-columns: 1fr 44px 48px 40px;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--c-border);
+    font-size: 16px;
+    color: #5a6880;
+}
+.wl-weekly-list li:last-child { border-bottom: none; }
+.wl-weekly-list li.is-today {
+    background: var(--c-primary-soft);
+    border-radius: 12px;
+    border-bottom-color: transparent;
+    color: var(--c-primary);
+}
+
+.wl-weekly-list img { width: 36px; height: 36px; }
+
+.wl-weekly-min {
+    color: var(--c-primary);
+    font-weight: 700;
+    text-align: right;
+}
+.wl-weekly-max {
+    color: var(--c-text-sub);
+    text-align: right;
+}

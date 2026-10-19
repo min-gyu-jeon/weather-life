@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- AI가 알려주는 오늘의 생활 정보: 추천 복장 / 추천 운동 / 외출 준비물 / 빨래 건조지수 -->
+<section class="wl-card wl-life" th:fragment="life-info">
+    <h2 class="wl-title">
+        <img th:src="@{/image/icon/sparkle.svg}" alt="">
+        AI가 알려주는 오늘의 생활 정보
+    </h2>
+
+    <div class="wl-life-grid">
+        <!-- 오늘의 추천 복장 -->
+        <article class="wl-life-box wl-outfit">
+            <h3 class="wl-subtitle">
+                <img th:src="@{/image/icon/shirt.svg}" alt="">
+                오늘의 추천 복장
+            </h3>
+            <div class="wl-life-visual">
+                <img class="wl-life-character"
+     th:src="@{/weather/outfits/assets/characters/f_autumn_basic_340_poster.png}"
+     alt="아이보리 긴팔과 청바지를 입은 캐릭터">
+                <ul class="wl-outfit-items">
+                    <li th:each="item : ${outfit.items}">
+                        <img th:src="@{${item.image}}" th:alt="${item.name}" th:title="${item.name}">
+                    </li>
+                </ul>
+            </div>
+            <p class="wl-life-headline" th:text="${outfit.title}">비 오는 날은 방수 아이템이 좋아요!</p>
+            <p class="wl-life-desc" th:utext="${outfit.description}">우산과 방수 재킷으로<br>비에도 쾌적하게 외출하세요.</p>
+        </article>
+
+        <!-- 오늘의 추천 운동 -->
+        <article class="wl-life-box wl-exercise">
+            <h3 class="wl-subtitle">
+                <img th:src="@{/image/icon/shoe.svg}" alt="">
+                오늘의 추천 운동
+            </h3>
+            <div class="wl-life-visual">
+                <video class="wl-life-character"
+       autoplay muted loop playsinline
+       th:poster="@{/weather/activities/activity_autumn_walk_340_poster.png}"
+       aria-label="단풍 공원을 산책하는 캐릭터">
+    <source th:src="@{/weather/activities/activity_autumn_walk_340.mp4}"
+            type="video/mp4">
+</video>
+                <ul class="wl-exercise-options">
+                    <li th:each="option : ${exercise.options}" th:classappend="${option.selected} ? 'is-selected'">
+                        <img th:src="@{${option.icon}}" alt="">
+                        <span th:text="${option.name}">실내운동</span>
+                    </li>
+                </ul>
+            </div>
+            <p class="wl-life-headline" th:text="${exercise.title}">오늘은 실내 운동을 추천해요!</p>
+            <p class="wl-life-desc" th:utext="${exercise.description}">비 오는 날에는 실내에서<br>가볍게 몸을 움직여보세요.</p>
+        </article>
+
+        <!-- 외출 준비물 + 빨래 건조지수 -->
+        <div class="wl-life-side">
+            <article class="wl-life-box wl-belongings">
+                <h3 class="wl-subtitle">
+                    <img th:src="@{/image/icon/bag.svg}" alt="">
+                    외출 준비물
+                </h3>
+                <ul class="wl-belongings-list">
+                    <li th:each="item : ${belongings}">
+                        <span class="wl-belongings-icon"><img th:src="@{${item.image}}" alt=""></span>
+                        <span th:text="${item.name}">우산</span>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="wl-life-box wl-laundry">
+                <h3 class="wl-subtitle">
+                    <img th:src="@{/image/icon/basket.svg}" alt="">
+                    빨래 건조 전망
+                </h3>
+                <img class="wl-laundry-image" th:src="@{${laundry.image}}" alt="빨래 건조 상황">
+                <div class="wl-laundry-status" th:classappend="${laundry.level}">
+                    <div class="wl-laundry-bar">
+                        <span th:style="|width: ${laundry.percent}%|"></span>
+                    </div>
+                    <strong th:text="${laundry.message}">건조 어려워요!</strong>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

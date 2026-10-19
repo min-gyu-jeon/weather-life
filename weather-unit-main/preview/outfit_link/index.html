@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><base href="../../static/weather/outfits/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>옷 추천 연결 미리보기</title>
+<style>
+:root{--bg:#f4f6fa;--paper:#fff;--ink:#222a36;--muted:#667085;--line:#dbe1ea;--accent:#3a6ea5;--soft:#e6eef8;--warn:#a8650b;--warnsoft:#fbf0dc}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:24px 16px 60px;display:grid;gap:22px}
+h1{font-size:22px;margin:0} h2{font-size:17px;margin:0 0 8px}
+.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:800px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;min-width:0}
+textarea{width:100%;min-height:260px;font:12.5px/1.45 Consolas,monospace;border:1px solid var(--line);border-radius:8px;padding:10px;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)} button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.card{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:start}
+@media (max-width:480px){.card{grid-template-columns:1fr}}
+.char{width:200px;height:200px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.char video,.char img{width:100%;height:100%;display:block;object-fit:cover}
+.icons{display:grid;gap:6px}
+.ic{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:4px 8px;background:#fbfcfe}
+.ic img{width:40px;height:40px}
+.ic b{font-size:14px} .ic span{display:block;font-size:12px;color:var(--muted)}
+.chip{display:inline-block;padding:1px 9px;border-radius:999px;font-size:12px;font-weight:600;background:var(--soft);color:var(--accent)}
+.chip.temp{background:var(--warnsoft);color:var(--warn)}
+.err{color:#b03a3a;font-size:13px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.g{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;font-size:12px}
+.g img{width:64px;height:64px;display:block;margin:0 auto 4px}
+.g small{color:var(--muted)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13px;background:var(--paper)}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+@media (prefers-reduced-motion: reduce){video{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>옷 추천 API 결과 → 캐릭터 · 아이콘 미리보기</h1>
+    <p class="muted">백엔드가 보내는 <code>outfits</code> 결과를 붙여넣으면, 미리 만든 캐릭터 1장과 옷 아이콘을 골라 보여 줍니다. 날씨 계산은 백엔드가 하고 여기서는 그림만 고릅니다. (M29 · 2026-10-14)</p>
+  </header>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>1. API 결과 넣기</h2>
+      <div class="row" id="samples"></div>
+      <textarea id="src" spellcheck="false"></textarea>
+      <div class="row">
+        <span class="muted">성별</span>
+        <button id="gF" class="on" type="button">여성</button>
+        <button id="gM" type="button">남성</button>
+        <button id="go" type="button" style="margin-left:auto">보기</button>
+      </div>
+      <div id="err" class="err"></div>
+    </section>
+
+    <section class="panel">
+      <h2>2. 화면에 나올 모습</h2>
+      <div class="card">
+        <div class="char" id="char"></div>
+        <div class="icons" id="icons"></div>
+      </div>
+      <p id="why" class="muted"></p>
+    </section>
+  </div>
+
+  <section>
+    <h2 id="gtitle">옷 아이콘 (카탈로그 170개를 모두 덮음)</h2>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section>
+    <h2>추천 착장 세트 (여 20 · 남 16)</h2>
+    <div class="tbl"><table id="rules"></table></div>
+    <p class="muted">백엔드 결과와 옷이 가장 많이 겹치는 세트를 고릅니다(파란 테두리 = 지금 고른 세트). 주황 = 그림을 아직 만들기 전이라 같은 계절 그림으로 임시 표시.</p>
+  </section>
+</div>
+
+<script src="outfit_visual_map.js"></script>
+<script src="outfit_visual.js"></script>
+<script>
+var MAP = window.OUTFIT_VISUAL_MAP, gender = "F";
+function it(id){ return id ? {id:id, name:MAP.items[id].name, slot:MAP.items[id].slot} : null; }
+function o(top, bottom, outer, shoes, extra){
+  return Object.assign({structure:"SEPARATES", top:it(top), bottom:it(bottom), onePiece:null, innerTop:null,
+    outer:it(outer), outerUsage: outer ? "WEAR" : null, baseLayer:null, shoes:it(shoes), accessories:[],
+    reasons:["샘플"]}, extra || {});
+}
+var SAMPLES = [
+  ["백엔드 예시", '"outfits":[\n   {"id":"38b41810-f09d-38de-9f98-0e19e535e644"\n   ,"structure":"SEPARATES"\n   ,"top":{"id":"C019"\n   ,"name":"후드 티셔츠"\n   ,"slot":"TOP"}\n   ,"bottom":{"id":"C045"\n   ,"name":"조거 팬츠"\n   ,"slot":"BOTTOM"}\n   ,"onePiece":null\n   ,"innerTop":null\n   ,"outer":{"id":"C058"\n   ,"name":"블루종"\n   ,"slot":"OUTER"}\n   ,"outerUsage":"WEAR"\n   ,"baseLayer":null\n   ,"shoes":{"id":"C138"\n   ,"name":"기본 운동화"\n   ,"slot":"SHOES"}\n   ,"accessories":[]\n   ,"reasons":["의류별 추천 기온 범위와 선택한 용도에 맞춰 조합했습니다."]}]'],
+  ["한여름", o("C001","C028",null,"C137")],
+  ["운동", o("C143","C149",null,"C137")],
+  ["원피스+가디건", o(null,null,"C052","C139",{structure:"ONE_PIECE", onePiece:it("C107")})],
+  ["가을 스커트", o("C081","C105","C056","C140")],
+  ["코트+바지", o("C022","C038","C128","C139")],
+  ["한겨울", o("C025","C043","C067","C142",{baseLayer:it("C071")})],
+  ["비 오는 날", o("C001","C028","C134","C141")],
+  ["여름 출근", o("C076","C040",null,"C139")],
+  ["가을 출근", o("C012","C094","C053","C139")],
+  ["한파", o("C019","C036","C067","C142")]
+];
+var src = document.getElementById("src");
+SAMPLES.forEach(function(s, i){
+  var b = document.createElement("button"); b.type = "button"; b.textContent = s[0];
+  b.onclick = function(){ src.value = typeof s[1] === "string" ? s[1] : JSON.stringify({outfits:[s[1]]}, null, 1); show(); };
+  document.getElementById("samples").appendChild(b);
+});
+
+function parse(text){
+  text = text.trim();
+  if (/^"outfits"\s*:/.test(text)) text = "{" + text + "}";
+  var j = JSON.parse(text);
+  if (Array.isArray(j)) j = j[0];
+  if (j.outfits) j = j.outfits[0];
+  if (!j) throw new Error("outfits 안에 결과가 없습니다.");
+  return j;
+}
+var KIND = {NONE:"아우터 없음", THIN:"얇은 겉옷", JACKET:"재킷", COAT:"코트", PADDING:"패딩"};
+var LOWER = {SHORTS:"반바지", PANTS:"바지", SKIRT:"스커트", ONEPIECE:"원피스"};
+function show(){
+  var err = document.getElementById("err"); err.textContent = "";
+  var outfit;
+  try { outfit = parse(src.value); } catch(e) { err.textContent = "JSON을 읽지 못했습니다: " + e.message; return; }
+  var r = pickOutfitVisual(outfit, gender, MAP);
+  var c = document.getElementById("char"); c.innerHTML = "";
+  var st = r.set;
+  if (st.mp4) {
+    var v = document.createElement("video");
+    v.autoplay = v.muted = v.loop = v.playsInline = true; v.poster = st.poster; v.src = st.mp4;
+    v.setAttribute("aria-label", st.label); c.appendChild(v);
+  } else {
+    var im = document.createElement("img"); im.src = st.poster; im.alt = st.label; c.appendChild(im);
+  }
+  var box = document.getElementById("icons"); box.innerHTML = "";
+  r.icons.forEach(function(x){
+    var d = document.createElement("div"); d.className = "ic";
+    d.innerHTML = (x.iconFile ? '<img src="'+x.iconFile+'" alt="">' : '<span>?</span>') +
+      '<div><b></b><span></span></div>';
+    d.querySelector("b").textContent = x.name;
+    d.querySelector("div span").textContent = x.slotLabel + " · " + x.iconLabel + " · " + x.id + (x.usage && x.usage !== "WEAR" ? " · 챙기기" : "");
+    box.appendChild(d);
+  });
+  document.getElementById("why").innerHTML = "";
+  var why = document.getElementById("why");
+  why.appendChild(document.createTextNode("고른 세트: " + st.label + " (점수 " + Math.floor(r.score) + ") ← " + KIND[r.outerKind] + " × " + LOWER[r.lower] + (r.sport ? " · 운동" : "") + (r.rain ? " · 비" : "") + " "));
+  var chip = document.createElement("span"); chip.className = "chip" + (st.status === "temp" ? " temp" : "");
+  chip.textContent = st.status === "temp" ? "그림 만들기 전 · 비슷한 그림" : "그림 있음"; why.appendChild(chip);
+  document.querySelectorAll("#rules tr[data-k]").forEach(function(tr){ tr.style.outline = tr.dataset.k === r.setKey ? "2px solid var(--accent)" : ""; });
+}
+function setG(g){ gender = g; document.getElementById("gF").className = g==="F"?"on":""; document.getElementById("gM").className = g==="M"?"on":""; show(); }
+document.getElementById("gF").onclick = function(){ setG("F"); };
+document.getElementById("gM").onclick = function(){ setG("M"); };
+document.getElementById("go").onclick = show;
+
+// 아이콘 갤러리 (아이콘마다 몇 개의 옷이 들어갔는지)
+document.getElementById("gtitle").textContent = "옷 아이콘 " + Object.keys(MAP.icons).length + "개 (카탈로그 " + Object.keys(MAP.items).length + "개를 모두 덮음)";
+var count = {}; Object.keys(MAP.items).forEach(function(id){ var k = MAP.items[id].icon; count[k] = (count[k]||0) + 1; });
+Object.keys(MAP.icons).forEach(function(k){
+  var g = document.createElement("div"); g.className = "g";
+  g.innerHTML = '<img src="'+MAP.icons[k].file+'" alt=""><div></div><small></small>';
+  g.querySelector("div").textContent = MAP.icons[k].label;
+  g.querySelector("small").textContent = count[k] + "개";
+  g.title = Object.keys(MAP.items).filter(function(id){ return MAP.items[id].icon === k; }).map(function(id){ return MAP.items[id].short; }).join(", ");
+  document.getElementById("gallery").appendChild(g);
+});
+// 착장 세트 표
+var t = document.getElementById("rules"), html = "<tr><th>그림</th><th>세트</th><th>옷 (짧은 이름)</th><th>상태</th></tr>";
+var SLOT_ORDER = ["outer","top","onePiece","bottom","shoes"];
+Object.keys(MAP.sets).forEach(function(k){
+  var s = MAP.sets[k];
+  var clothes = SLOT_ORDER.filter(function(x){ return s.items[x]; }).map(function(x){ return MAP.items[s.items[x]].short; }).join(" · ");
+  html += '<tr data-k="'+k+'"'+(s.status==="temp"?' style="background:var(--warnsoft)"':'')+'><td><img src="'+s.poster+'" alt="" style="width:56px;height:56px;border-radius:6px;display:block"></td><td>'+s.label+'</td><td>'+clothes+'</td><td>'+(s.status==="temp"?"그림 만들기 전":"그림 있음")+'</td></tr>';
+});
+t.innerHTML = html;
+src.value = SAMPLES[0][1]; show();
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+# Windows CPU configuration verified in this project.
+-r requirements-api.txt
+-r requirements-pipeline.txt
+onnxruntime==1.20.1

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Life</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/today-weather.css}">
+    <link rel="stylesheet" th:href="@{/css/life-info.css}">
+    <link rel="stylesheet" th:href="@{/css/gauges.css}">
+    <link rel="stylesheet" th:href="@{/css/seasonal-theme.css}">
+    <link rel="stylesheet" th:href="@{/css/weather-effects.css}">
+</head>
+<body>
+
+<!--
+  자바 코드를 추가/수정하지 않기 위해, weather 프로젝트의 MainController 가 내려주던 목업 데이터를
+  이 th:with 에서 같은 이름으로 정의합니다. (fragment/* 는 weather 프로젝트와 동일)
+  실제 컨트롤러가 같은 이름의 모델 값을 내려주게 되면 이 th:with 블록만 지우면 됩니다.
+-->
+<div class="wl-container" th:with="
+        location='종로구',
+        districts=${ {'종로구', '중구', '용산구', '성동구', '광진구',
+                      '동대문구', '중랑구', '성북구', '강북구', '도봉구',
+                      '노원구', '은평구', '서대문구', '마포구', '양천구',
+                      '강서구', '구로구', '금천구', '영등포구', '동작구',
+                      '관악구', '서초구', '강남구', '송파구', '강동구'} },
+        dailyWeathers=${ {
+            {'dateLabel':'07. 12 (일)', 'dayTag':'오늘', 'today':true, 'weatherIcon':'/image/weather/rain.svg',
+             'temperature':22, 'condition':'비', 'forecastTemp':22, 'feelsLikeTemp':24, 'kmaTemp':22,
+             'characterImage':'/image/character/rain-today.svg', 'discomfortIndex':78},
+            {'dateLabel':'07. 13 (월)', 'dayTag':'내일', 'today':false, 'weatherIcon':'/image/weather/rain.svg',
+             'temperature':26, 'condition':'흐리고 비', 'forecastTemp':27, 'feelsLikeTemp':28, 'kmaTemp':26,
+             'characterImage':'/image/character/rain-tomorrow.svg', 'discomfortIndex':62},
+            {'dateLabel':'07. 14 (화)', 'dayTag':'모레', 'today':false, 'weatherIcon':'/image/weather/cloud.svg',
+             'temperature':27, 'condition':'흐림', 'forecastTemp':28, 'feelsLikeTemp':29, 'kmaTemp':27,
+             'characterImage':'/image/character/rain-dayafter.svg', 'discomfortIndex':70}
+        } },
+        outfit=${ {'characterImage':'/image/character/outfit.svg',
+                   'items':{ {'name':'우비', 'image':'/image/item/raincoat.svg'},
+                             {'name':'우산', 'image':'/image/item/umbrella.svg'},
+                             {'name':'장화', 'image':'/image/item/boots.svg'},
+                             {'name':'방수 가방', 'image':'/image/item/waterproof-bag.svg'} },
+                   'title':'비 오는 날은 방수 아이템이 좋아요!',
+                   'description':'우산과 방수 재킷으로&lt;br&gt;비에도 쾌적하게 외출하세요.'} },
+        exercise=${ {'characterImage':'/image/character/exercise.svg',
+                     'options':{ {'name':'실내운동', 'icon':'/image/exercise/dumbbell.svg', 'selected':true},
+                                 {'name':'요가', 'icon':'/image/exercise/yoga.svg', 'selected':false},
+                                 {'name':'스트레칭', 'icon':'/image/exercise/stretching.svg', 'selected':false},
+                                 {'name':'홈트레이닝', 'icon':'/image/exercise/home-training.svg', 'selected':false} },
+                     'title':'오늘은 실내 운동을 추천해요!',
+                     'description':'비 오는 날에는 실내에서&lt;br&gt;가볍게 몸을 움직여보세요.'} },
+        belongings=${ { {'name':'우산', 'image':'/image/item/umbrella.svg'},
+                        {'name':'우비', 'image':'/image/item/raincoat.svg'},
+                        {'name':'방수 가방', 'image':'/image/item/waterproof-bag.svg'},
+                        {'name':'물병', 'image':'/image/item/bottle.svg'} } },
+        laundry=${ {'image':'/image/laundry/laundry-rain.svg', 'percent':25, 'message':'건조 어려워요!', 'level':'bad'} },
+        gauges=${ { {'key':'uv', 'title':'자외선 지수', 'icon':'/image/icon/sun.svg', 'value':'2', 'unit':'', 'status':'낮음', 'percent':20, 'color':'blue'},
+                    {'key':'dust', 'title':'미세먼지', 'icon':'/image/icon/dust.svg', 'value':'28', 'unit':'', 'status':'좋음', 'percent':35, 'color':'green'},
+                    {'key':'pop', 'title':'강수확률', 'icon':'/image/icon/umbrella.svg', 'value':'90', 'unit':'%', 'status':'높음', 'percent':90, 'color':'red'},
+                    {'key':'wind', 'title':'바람 세기', 'icon':'/image/icon/wind.svg', 'value':'5', 'unit':'m/s', 'status':'강함', 'percent':70, 'color':'orange'} } }">
+    <!-- 헤더 -->
+    <header th:replace="~{fragment/header :: header}"></header>
+
+    <!-- 오늘의 날씨 (오늘 / 내일 / 모레) : 주간 날씨 캘린더를 제거하고 가로 전체 폭 사용 -->
+    <section th:replace="~{fragment/today-weather :: today-weather}"></section>
+
+    <!-- AI 생활 정보 -->
+    <section th:replace="~{fragment/life-info :: life-info}"></section>
+
+    <!-- 자외선 / 미세먼지 / 강수확률 / 바람 게이지 -->
+    <section th:replace="~{fragment/gauges :: gauges}"></section>
+</div>
+
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/weather-effects.js}"></script>
+<script th:src="@{/js/season-theme.js}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const season = new URLSearchParams(location.search).get("season");
+    const labels = {
+        spring: "🌱 봄",
+        summer: "☀️ 여름",
+        autumn: "🍂 가을",
+        winter: "❄️ 겨울"
+    };
+
+    if (Object.hasOwn(labels, season)) {
+        document.documentElement.dataset.season = season;
+        const display = document.getElementById("seasonDisplay");
+        if (display) display.textContent = labels[season];
+    }
+});
+</script>
+<script th:src="@{/weather/rules/pick_example.js}"></script>
+<script th:src="@{/js/activity-card.js}"></script>
+<script th:src="@{/js/life-side.js}"></script>
+<script th:src="@{/js/outfit-card.js}"></script>
+</body>
+</html>

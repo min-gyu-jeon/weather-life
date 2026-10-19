@@ -1,0 +1,30 @@
+# Local Python environment and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local configuration, credentials and process state
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+.aws/
+.cdsapirc
+.ecmwfapirc
+*.pid
+*.log
+
+# Downloaded weights, inputs and generated forecasts
+models/
+data/
+transfer/
+*.onnx
+*.onnx.part
+*.grib
+*.grib2
+*.npy
+*.npz
+*.nc

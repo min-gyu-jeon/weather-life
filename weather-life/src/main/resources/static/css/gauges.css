@@ -1,0 +1,48 @@
+/* ===== 게이지 ===== */
+.wl-gauges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.wl-gauge { padding: 18px 18px 14px; }
+
+.wl-gauge-body {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.wl-gauge-arc { width: 100%; display: block; }
+.wl-gauge-arc path {
+    fill: none;
+    stroke-width: 10;
+    stroke-linecap: round;
+}
+.wl-gauge-arc .track { stroke: #e6ebf2; }
+
+.wl-gauge-value {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+.wl-gauge-value strong { font-size: 34px; font-weight: 800; line-height: 1; }
+.wl-gauge-value small { font-size: 18px; font-weight: 700; margin-left: 2px; }
+.wl-gauge-value p { font-size: 16px; font-weight: 700; margin-top: 6px; }
+
+/* 색상 */
+.wl-gauge.blue .fill { stroke: var(--c-blue); }
+.wl-gauge.blue .wl-gauge-value p { color: var(--c-blue); }
+.wl-gauge.green .fill { stroke: var(--c-green); }
+.wl-gauge.green .wl-gauge-value p { color: var(--c-green); }
+.wl-gauge.red .fill { stroke: var(--c-red); }
+.wl-gauge.red .wl-gauge-value p { color: var(--c-red); }
+.wl-gauge.orange .fill { stroke: var(--c-orange); }
+.wl-gauge.orange .wl-gauge-value p { color: var(--c-red); }
+
+@media (max-width: 860px) {
+    .wl-gauges { grid-template-columns: repeat(2, 1fr); }
+}

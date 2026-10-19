@@ -1,0 +1,35 @@
+### 더운 가을: 여름 세트 허용
+POST http://localhost:8080/api/outfits/recommend
+Content-Type: application/json
+
+{"temperature":32,"humidity":65,"gender":"FEMALE","date":"2026-10-15","count":1,"seed":42}
+
+### 쌀쌀한 여름: 봄/가을 세트 허용
+POST http://localhost:8080/api/outfits/recommend
+Content-Type: application/json
+
+{"temperature":13,"humidity":60,"windSpeed":2,"gender":"MALE","date":"2026-07-15","seed":42}
+
+### 비 + 많은 강수 + 알려진 미세먼지
+POST http://localhost:8080/api/outfits/recommend
+Content-Type: application/json
+
+{"temperature":26,"humidity":85,"precipitation":"RAIN","precipitationProbability":90,"precipitationAmount":12,"airQuality":"BAD","gender":"FEMALE","seed":42}
+
+### 소품이 필요 없는 온화한 날
+POST http://localhost:8080/api/outfits/recommend
+Content-Type: application/json
+
+{"temperature":20,"humidity":50,"sky":"CLOUDY","gender":"FEMALE","date":"2026-10-15","seed":42}
+
+### DB 예보 + 성별
+GET http://localhost:8080/api/outfits/today?gu=영등포구&gender=FEMALE
+
+### 새 의류 56개
+GET http://localhost:8080/api/outfits/catalog
+
+### 기존 이미지 세트 36개
+GET http://localhost:8080/api/outfits/sets
+
+### 소품 19개
+GET http://localhost:8080/api/outfits/accessories

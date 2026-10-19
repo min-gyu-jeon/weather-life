@@ -1,0 +1,35 @@
+@baseUrl = http://localhost:8080
+@gu = 영등포구
+@date = 2026-10-16
+@at = 2026-10-16T09:00:00
+
+### 수동 수집: 지정 지역 기상청 호출 후 DB 저장
+# weather.collection.manual-enabled=true 필요
+POST {{baseUrl}}/api/internal/weather/collect?regionName={{gu}}
+
+### 수동 수집: 서울 전체 구 (동일 격자는 한 번만 호출)
+# 오늘 이전 예보 정리도 함께 실행됩니다.
+POST {{baseUrl}}/api/internal/weather/collect-all
+
+### 1. 지정 날짜의 시간별 날씨
+# date / at은 DB에 저장된 날짜·시각으로 바꿔 주세요.
+GET {{baseUrl}}/api/weather/short?gu={{gu}}&date={{date}}
+
+### 2. 지정 시각의 날씨
+GET {{baseUrl}}/api/weather/hour?gu={{gu}}&at={{at}}
+
+### 3. 지정 날짜의 시간별 복장·소품 추천
+GET {{baseUrl}}/api/outfits/by-date?gu={{gu}}&date={{date}}&gender=FEMALE&count=1&seed=42
+
+### 4. 지정 시각의 복장·소품 추천
+GET {{baseUrl}}/api/outfits/by-hour?gu={{gu}}&at={{at}}&gender=FEMALE&count=1&seed=42
+
+### 지역 선택 목록
+GET {{baseUrl}}/api/weather/districts
+
+### 필요할 때만 실행: 한국 기준 오늘 이전 예보 삭제
+POST {{baseUrl}}/api/internal/weather/cleanup
+
+### AI 모델(Pangu-Weather) 기온 예측: 별도 localhost:8000 AI 서버 호출
+# PowerShell에서 AI_FORECAST_API_KEY 환경 변수를 설정한 후 Spring Boot를 실행하세요.
+GET {{baseUrl}}/api/weather/ai?gu={{gu}}

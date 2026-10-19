@@ -1,0 +1,130 @@
+/* 봄 테마 */
+html[data-season="spring"] {
+    --c-primary: #f58496;
+    --c-primary-soft: #fff1f3;
+    --c-text: #17234b;
+    --c-text-sub: #597094;
+    --c-border: #f4dce1;
+    --c-card: rgba(255, 255, 255, 0.9);
+    --shadow: 0 8px 24px rgba(111, 132, 92, 0.09);
+}
+
+/* 기존 단색 배경 위에 봄의 색과 빛 표현 */
+html[data-season="spring"] body {
+    background:
+        radial-gradient(
+            ellipse at 75% 0%,
+            rgba(163, 210, 170, 0.55),
+            transparent 48%
+        ),
+        radial-gradient(
+            ellipse at 5% 15%,
+            rgba(255, 220, 229, 0.6),
+            transparent 38%
+        ),
+        radial-gradient(
+            ellipse at 50% 45%,
+            rgba(255, 255, 255, 0.95),
+            transparent 55%
+        ),
+        #faf7e8;
+    background-attachment: fixed;
+}
+
+html[data-season="spring"] .wl-day-card.is-today {
+    background: linear-gradient(
+        160deg,
+        #fff0f3 0%,
+        #fffaf6 65%,
+        #fff4ed 100%
+    );
+    border-color: #ff9aab;
+    box-shadow: 0 6px 22px rgba(245, 132, 150, 0.16);
+}
+html[data-season="spring"] body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("/image/theme/spring-blossoms.png");
+    background-position: center top;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.wl-container {
+    position: relative;
+    z-index: 1;
+}
+/* 여름: 수박과 시원한 하늘·민트색 */
+html[data-season="summer"] {
+    --season-image: url("/image/theme/summer-watermelon.png");
+    --season-background:
+        radial-gradient(
+            ellipse at 80% 0%,
+            rgba(169, 225, 205, 0.6),
+            transparent 50%
+        ),
+        linear-gradient(160deg, #effaff, #f0fbf4);
+}
+
+/* 가을: 단풍과 따뜻한 크림색 */
+html[data-season="autumn"] {
+    --season-image: url("/image/theme/autumn-leaves.png");
+    --season-background:
+        radial-gradient(
+            ellipse at 80% 0%,
+            rgba(245, 199, 139, 0.5),
+            transparent 50%
+        ),
+        linear-gradient(160deg, #fff7e8, #faf0e7);
+}
+
+/* 겨울: 눈 쌓인 가지와 연한 하늘색 */
+html[data-season="winter"] {
+    --season-image: url("/image/theme/winter-snow.png");
+    --season-background:
+        radial-gradient(
+            ellipse at 80% 0%,
+            rgba(186, 207, 238, 0.55),
+            transparent 50%
+        ),
+        linear-gradient(160deg, #f3f8ff, #edf2fa);
+}
+
+/* 배경색 적용 */
+html[data-season="summer"] body,
+html[data-season="autumn"] body,
+html[data-season="winter"] body {
+    background: var(--season-background);
+    background-attachment: fixed;
+}
+
+/* 계절 장식 이미지 적용 */
+html[data-season="summer"] body::before,
+html[data-season="autumn"] body::before,
+html[data-season="winter"] body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--season-image);
+    background-position: center top;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+}
+/* 전체 콘텐츠 폭을 약 10% 줄이고 가운데 정렬 */
+.wl-container {
+    width: 90%;
+    max-width: 900px;
+    margin-inline: auto;
+}
+
+/* 모바일에서는 읽기 편한 폭 유지 */
+@media (max-width: 600px) {
+    .wl-container {
+        width: 100%;
+    }
+}

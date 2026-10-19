@@ -1,0 +1,1486 @@
+{
+  "version": "2026-10-15-fixed-sets-v2",
+  "description": "확정된 아이콘 56개를 각각 하나의 독립 의류로 재분류했습니다. 기온 수치는 세트 안에서 선택할 때 쓰는 경험 규칙이며 소재 변형을 별도 의류로 생성하지 않습니다.",
+  "items": [
+    {
+      "id": "tee_short",
+      "name": "반팔 티",
+      "iconPath": "/weather/outfits/assets/icons/tee_short.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 18.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 29.0,
+      "breathability": 5,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "sport_tee",
+      "name": "기능성 티",
+      "iconPath": "/weather/outfits/assets/icons/sport_tee.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SPORT",
+      "minTemperature": 20.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 30.0,
+      "breathability": 5,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "collar_tee",
+      "name": "카라티",
+      "iconPath": "/weather/outfits/assets/icons/collar_tee.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 18.0,
+      "maxTemperature": 45.0,
+      "idealTemperature": 27.0,
+      "breathability": 4,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "shirt_short",
+      "name": "반팔 셔츠",
+      "iconPath": "/weather/outfits/assets/icons/shirt_short.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 18.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 28.0,
+      "breathability": 5,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "knit_thin",
+      "name": "여름 니트",
+      "iconPath": "/weather/outfits/assets/icons/knit_thin.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 19.0,
+      "maxTemperature": 34.0,
+      "idealTemperature": 25.0,
+      "breathability": 4,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "tee_long",
+      "name": "긴팔 티",
+      "iconPath": "/weather/outfits/assets/icons/tee_long.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -10.0,
+      "maxTemperature": 27.0,
+      "idealTemperature": 19.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "shirt",
+      "name": "셔츠",
+      "iconPath": "/weather/outfits/assets/icons/shirt.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": -10.0,
+      "maxTemperature": 30.0,
+      "idealTemperature": 21.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "check_shirt",
+      "name": "체크·데님 셔츠",
+      "iconPath": "/weather/outfits/assets/icons/check_shirt.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -15.0,
+      "maxTemperature": 24.0,
+      "idealTemperature": 16.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "blouse",
+      "name": "블라우스",
+      "iconPath": "/weather/outfits/assets/icons/blouse.svg",
+      "slot": "TOP",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 5.0,
+      "maxTemperature": 30.0,
+      "idealTemperature": 22.0,
+      "breathability": 4,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "sweatshirt",
+      "name": "맨투맨",
+      "iconPath": "/weather/outfits/assets/icons/sweatshirt.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -30.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 13.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "hoodie",
+      "name": "후드티",
+      "iconPath": "/weather/outfits/assets/icons/hoodie.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -25.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 13.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "knit",
+      "name": "니트",
+      "iconPath": "/weather/outfits/assets/icons/knit.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": -40.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 10.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "turtleneck",
+      "name": "터틀넥",
+      "iconPath": "/weather/outfits/assets/icons/turtleneck.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": -50.0,
+      "maxTemperature": 16.0,
+      "idealTemperature": 3.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "INNER_OK"
+      ]
+    },
+    {
+      "id": "knit_vest",
+      "name": "조끼·뷔스티에",
+      "iconPath": "/weather/outfits/assets/icons/knit_vest.svg",
+      "slot": "TOP",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 5.0,
+      "maxTemperature": 24.0,
+      "idealTemperature": 16.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": true,
+      "tags": []
+    },
+    {
+      "id": "pajama",
+      "name": "잠옷·라운지웨어",
+      "iconPath": "/weather/outfits/assets/icons/pajama.svg",
+      "slot": "ONE_PIECE",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "HOME"
+      ],
+      "style": "HOME",
+      "minTemperature": 15.0,
+      "maxTemperature": 32.0,
+      "idealTemperature": 23.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "shorts",
+      "name": "반바지",
+      "iconPath": "/weather/outfits/assets/icons/shorts.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 21.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 30.0,
+      "breathability": 5,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "SHORTS",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "sport_shorts",
+      "name": "운동 반바지",
+      "iconPath": "/weather/outfits/assets/icons/sport_shorts.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SPORT",
+      "minTemperature": 22.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 31.0,
+      "breathability": 5,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "SHORTS",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "jeans",
+      "name": "청바지",
+      "iconPath": "/weather/outfits/assets/icons/jeans.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 5.0,
+      "maxTemperature": 32.0,
+      "idealTemperature": 20.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "PANTS",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "slacks",
+      "name": "슬랙스·면바지",
+      "iconPath": "/weather/outfits/assets/icons/slacks.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": -5.0,
+      "maxTemperature": 40.0,
+      "idealTemperature": 22.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "PANTS",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "cargo",
+      "name": "카고 팬츠",
+      "iconPath": "/weather/outfits/assets/icons/cargo.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 5.0,
+      "maxTemperature": 27.0,
+      "idealTemperature": 17.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "PANTS",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "jogger",
+      "name": "조거·트레이닝",
+      "iconPath": "/weather/outfits/assets/icons/jogger.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SPORT",
+      "minTemperature": 4.0,
+      "maxTemperature": 27.0,
+      "idealTemperature": 17.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "PANTS",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "warm_pants",
+      "name": "기모·울 바지",
+      "iconPath": "/weather/outfits/assets/icons/warm_pants.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -50.0,
+      "maxTemperature": 13.0,
+      "idealTemperature": 0.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "PANTS",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "leggings",
+      "name": "레깅스",
+      "iconPath": "/weather/outfits/assets/icons/leggings.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SPORT",
+      "minTemperature": 8.0,
+      "maxTemperature": 30.0,
+      "idealTemperature": 20.0,
+      "breathability": 4,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "PANTS",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "skirt_mini",
+      "name": "미니 스커트",
+      "iconPath": "/weather/outfits/assets/icons/skirt_mini.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 20.0,
+      "maxTemperature": 38.0,
+      "idealTemperature": 26.0,
+      "breathability": 4,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "SKIRT",
+      "requiresInnerTop": false,
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "id": "pleats",
+      "name": "플리츠 스커트",
+      "iconPath": "/weather/outfits/assets/icons/pleats.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 17.0,
+      "maxTemperature": 33.0,
+      "idealTemperature": 24.0,
+      "breathability": 4,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "SKIRT",
+      "requiresInnerTop": false,
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "id": "skirt_midi",
+      "name": "미디 스커트",
+      "iconPath": "/weather/outfits/assets/icons/skirt_midi.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 3.0,
+      "maxTemperature": 30.0,
+      "idealTemperature": 18.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "SKIRT",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "skirt_long",
+      "name": "롱스커트",
+      "iconPath": "/weather/outfits/assets/icons/skirt_long.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 12.0,
+      "maxTemperature": 35.0,
+      "idealTemperature": 24.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "SKIRT",
+      "requiresInnerTop": false,
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "id": "leather_skirt",
+      "name": "가죽 스커트",
+      "iconPath": "/weather/outfits/assets/icons/leather_skirt.svg",
+      "slot": "BOTTOM",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 5.0,
+      "maxTemperature": 22.0,
+      "idealTemperature": 13.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "SKIRT",
+      "requiresInnerTop": false,
+      "tags": [
+        "AVOID_RAIN"
+      ]
+    },
+    {
+      "id": "dress_sleeveless",
+      "name": "민소매 원피스",
+      "iconPath": "/weather/outfits/assets/icons/dress_sleeveless.svg",
+      "slot": "ONE_PIECE",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 23.0,
+      "maxTemperature": 45.0,
+      "idealTemperature": 30.0,
+      "breathability": 5,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "id": "dress_short",
+      "name": "반팔 원피스",
+      "iconPath": "/weather/outfits/assets/icons/dress_short.svg",
+      "slot": "ONE_PIECE",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 16.0,
+      "maxTemperature": 45.0,
+      "idealTemperature": 27.0,
+      "breathability": 4,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "id": "dress_long",
+      "name": "롱·셔츠 원피스",
+      "iconPath": "/weather/outfits/assets/icons/dress_long.svg",
+      "slot": "ONE_PIECE",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 12.0,
+      "maxTemperature": 30.0,
+      "idealTemperature": 21.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "id": "dress_knit",
+      "name": "니트 원피스",
+      "iconPath": "/weather/outfits/assets/icons/dress_knit.svg",
+      "slot": "ONE_PIECE",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 0.0,
+      "maxTemperature": 20.0,
+      "idealTemperature": 10.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "bustier_dress",
+      "name": "뷔스티에·멜빵치마",
+      "iconPath": "/weather/outfits/assets/icons/bustier_dress.svg",
+      "slot": "ONE_PIECE",
+      "genders": [
+        "FEMALE"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 12.0,
+      "maxTemperature": 30.0,
+      "idealTemperature": 22.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": true,
+      "tags": []
+    },
+    {
+      "id": "jumpsuit",
+      "name": "점프수트·멜빵바지",
+      "iconPath": "/weather/outfits/assets/icons/jumpsuit.svg",
+      "slot": "ONE_PIECE",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 13.0,
+      "maxTemperature": 32.0,
+      "idealTemperature": 23.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": true,
+      "tags": []
+    },
+    {
+      "id": "cardigan",
+      "name": "가디건",
+      "iconPath": "/weather/outfits/assets/icons/cardigan.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 12.0,
+      "maxTemperature": 25.0,
+      "idealTemperature": 19.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "windbreaker",
+      "name": "바람막이",
+      "iconPath": "/weather/outfits/assets/icons/windbreaker.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SPORT",
+      "minTemperature": 10.0,
+      "maxTemperature": 26.0,
+      "idealTemperature": 18.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 2,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "zipup",
+      "name": "집업",
+      "iconPath": "/weather/outfits/assets/icons/zipup.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 9.0,
+      "maxTemperature": 24.0,
+      "idealTemperature": 17.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "jacket_casual",
+      "name": "사파리·야상",
+      "iconPath": "/weather/outfits/assets/icons/jacket_casual.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 7.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 15.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "blazer",
+      "name": "블레이저",
+      "iconPath": "/weather/outfits/assets/icons/blazer.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 9.0,
+      "maxTemperature": 24.0,
+      "idealTemperature": 17.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "denim_jacket",
+      "name": "데님 재킷",
+      "iconPath": "/weather/outfits/assets/icons/denim_jacket.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 10.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 17.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "leather_jacket",
+      "name": "가죽 재킷",
+      "iconPath": "/weather/outfits/assets/icons/leather_jacket.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 8.0,
+      "maxTemperature": 21.0,
+      "idealTemperature": 14.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 2,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "AVOID_RAIN"
+      ]
+    },
+    {
+      "id": "blouson",
+      "name": "블루종·항공점퍼",
+      "iconPath": "/weather/outfits/assets/icons/blouson.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 5.0,
+      "maxTemperature": 22.0,
+      "idealTemperature": 14.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 2,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "trench",
+      "name": "트렌치코트",
+      "iconPath": "/weather/outfits/assets/icons/trench.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 7.0,
+      "maxTemperature": 22.0,
+      "idealTemperature": 15.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "coat_short",
+      "name": "숏코트",
+      "iconPath": "/weather/outfits/assets/icons/coat_short.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": -8.0,
+      "maxTemperature": 15.0,
+      "idealTemperature": 6.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "coat_long",
+      "name": "롱코트",
+      "iconPath": "/weather/outfits/assets/icons/coat_long.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": -15.0,
+      "maxTemperature": 14.0,
+      "idealTemperature": 4.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "light_padding",
+      "name": "경량패딩·플리스",
+      "iconPath": "/weather/outfits/assets/icons/light_padding.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -8.0,
+      "maxTemperature": 16.0,
+      "idealTemperature": 7.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "padding",
+      "name": "패딩",
+      "iconPath": "/weather/outfits/assets/icons/padding.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -50.0,
+      "maxTemperature": 10.0,
+      "idealTemperature": -6.0,
+      "breathability": 0,
+      "waterResistance": 0,
+      "windResistance": 2,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "fur",
+      "name": "무스탕·퍼",
+      "iconPath": "/weather/outfits/assets/icons/fur.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": -20.0,
+      "maxTemperature": 10.0,
+      "idealTemperature": 0.0,
+      "breathability": 0,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "AVOID_RAIN"
+      ]
+    },
+    {
+      "id": "rain",
+      "name": "레인재킷",
+      "iconPath": "/weather/outfits/assets/icons/rain.svg",
+      "slot": "OUTER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 12.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 25.0,
+      "breathability": 3,
+      "waterResistance": 2,
+      "windResistance": 2,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "sneakers",
+      "name": "운동화",
+      "iconPath": "/weather/outfits/assets/icons/sneakers.svg",
+      "slot": "SHOES",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -2.0,
+      "maxTemperature": 35.0,
+      "idealTemperature": 20.0,
+      "breathability": 3,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "mesh_sneakers",
+      "name": "통풍 운동화",
+      "iconPath": "/weather/outfits/assets/icons/mesh_sneakers.svg",
+      "slot": "SHOES",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SPORT",
+      "minTemperature": 20.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 30.0,
+      "breathability": 5,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "AVOID_RAIN"
+      ]
+    },
+    {
+      "id": "loafers",
+      "name": "로퍼",
+      "iconPath": "/weather/outfits/assets/icons/loafers.svg",
+      "slot": "SHOES",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": 8.0,
+      "maxTemperature": 35.0,
+      "idealTemperature": 22.0,
+      "breathability": 2,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "boots",
+      "name": "앵클부츠",
+      "iconPath": "/weather/outfits/assets/icons/boots.svg",
+      "slot": "SHOES",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "SMART",
+      "minTemperature": -5.0,
+      "maxTemperature": 19.0,
+      "idealTemperature": 8.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "rain_sneakers",
+      "name": "방수 운동화",
+      "iconPath": "/weather/outfits/assets/icons/rain_sneakers.svg",
+      "slot": "SHOES",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": 0.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 20.0,
+      "breathability": 2,
+      "waterResistance": 2,
+      "windResistance": 1,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    },
+    {
+      "id": "winter_boots",
+      "name": "방한화",
+      "iconPath": "/weather/outfits/assets/icons/winter_boots.svg",
+      "slot": "SHOES",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -50.0,
+      "maxTemperature": 10.0,
+      "idealTemperature": -4.0,
+      "breathability": 0,
+      "waterResistance": 2,
+      "windResistance": 2,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": [
+        "GRIP"
+      ]
+    },
+    {
+      "id": "thermal",
+      "name": "따뜻한 상하의",
+      "iconPath": "/weather/outfits/assets/icons/thermal.svg",
+      "slot": "BASE_LAYER",
+      "genders": [
+        "MALE",
+        "FEMALE",
+        "UNISEX"
+      ],
+      "occasions": [
+        "DAILY",
+        "OFFICE",
+        "EXERCISE"
+      ],
+      "style": "CASUAL",
+      "minTemperature": -50.0,
+      "maxTemperature": 8.0,
+      "idealTemperature": -3.0,
+      "breathability": 1,
+      "waterResistance": 0,
+      "windResistance": 0,
+      "bottomType": "NONE",
+      "requiresInnerTop": false,
+      "tags": []
+    }
+  ]
+}

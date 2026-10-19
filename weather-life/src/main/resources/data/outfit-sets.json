@@ -1,0 +1,1100 @@
+{
+  "version": "2026-10-15-fixed-sets-v2",
+  "description": "이미지가 준비된 36개 세트만 선택합니다. pieces는 각 슬롯에서 허용하는 옷 ID이며 계절·용도는 날씨 조건을 막는 필터가 아닙니다.",
+  "sets": [
+    {
+      "key": "f_spring_basic",
+      "name": "라벤더 가디건 + 흰 원피스",
+      "gender": "FEMALE",
+      "season": "SPRING",
+      "occasionLabel": "일상",
+      "minTemperature": 14.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 19.0,
+      "pieces": {
+        "onePiece": [
+          "dress_short",
+          "dress_long"
+        ],
+        "outer": [
+          "cardigan"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "key": "f_spring_campus",
+      "name": "후드집업 + 스웨트 팬츠",
+      "gender": "FEMALE",
+      "season": "SPRING",
+      "occasionLabel": "일상",
+      "minTemperature": 10.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 17.0,
+      "pieces": {
+        "top": [
+          "tee_long",
+          "tee_short"
+        ],
+        "bottom": [
+          "jogger"
+        ],
+        "outer": [
+          "zipup"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "f_spring_trench",
+      "name": "트렌치코트 + 블라우스 + 슬랙스",
+      "gender": "FEMALE",
+      "season": "SPRING",
+      "occasionLabel": "출근",
+      "minTemperature": 8.0,
+      "maxTemperature": 21.0,
+      "idealTemperature": 15.0,
+      "pieces": {
+        "top": [
+          "blouse",
+          "shirt"
+        ],
+        "bottom": [
+          "slacks"
+        ],
+        "outer": [
+          "trench"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "f_spring_rain",
+      "name": "방풍 재킷 + 청바지",
+      "gender": "FEMALE",
+      "season": "SPRING",
+      "occasionLabel": "비",
+      "minTemperature": 10.0,
+      "maxTemperature": 24.0,
+      "idealTemperature": 18.0,
+      "pieces": {
+        "top": [
+          "tee_long",
+          "tee_short"
+        ],
+        "bottom": [
+          "jeans"
+        ],
+        "outer": [
+          "windbreaker"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "RAIN",
+        "WIND"
+      ]
+    },
+    {
+      "key": "f_summer_basic",
+      "name": "라벤더 티 + 돌핀팬츠",
+      "gender": "FEMALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 24.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 33.0,
+      "pieces": {
+        "top": [
+          "tee_short"
+        ],
+        "bottom": [
+          "shorts"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "f_summer_athleisure",
+      "name": "애슬레저 (기능성 반팔 + 러닝 쇼츠)",
+      "gender": "FEMALE",
+      "season": "SUMMER",
+      "occasionLabel": "운동",
+      "minTemperature": 24.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 32.0,
+      "pieces": {
+        "top": [
+          "sport_tee"
+        ],
+        "bottom": [
+          "sport_shorts"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "SPORT"
+      ]
+    },
+    {
+      "key": "f_summer_onepiece",
+      "name": "반팔 원피스",
+      "gender": "FEMALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 23.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 29.0,
+      "pieces": {
+        "onePiece": [
+          "dress_short"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "key": "f_summer_office",
+      "name": "린넨 블라우스 + 쿨슬랙스",
+      "gender": "FEMALE",
+      "season": "SUMMER",
+      "occasionLabel": "출근",
+      "minTemperature": 22.0,
+      "maxTemperature": 37.0,
+      "idealTemperature": 27.0,
+      "pieces": {
+        "top": [
+          "shirt_short",
+          "blouse"
+        ],
+        "bottom": [
+          "slacks"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "f_summer_linen",
+      "name": "린넨 셔츠 + 버뮤다 반바지",
+      "gender": "FEMALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 24.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 30.0,
+      "pieces": {
+        "top": [
+          "shirt_short"
+        ],
+        "bottom": [
+          "shorts"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "f_summer_skirt",
+      "name": "루즈핏 반팔 + 롱스커트",
+      "gender": "FEMALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 23.0,
+      "maxTemperature": 38.0,
+      "idealTemperature": 28.0,
+      "pieces": {
+        "top": [
+          "tee_short"
+        ],
+        "bottom": [
+          "skirt_long"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "key": "f_summer_denim",
+      "name": "오버핏 반팔 + 쿨데님",
+      "gender": "FEMALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 21.0,
+      "maxTemperature": 32.0,
+      "idealTemperature": 25.0,
+      "pieces": {
+        "top": [
+          "tee_short"
+        ],
+        "bottom": [
+          "jeans"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "f_summer_rain",
+      "name": "레인재킷 + 반바지",
+      "gender": "FEMALE",
+      "season": "SUMMER",
+      "occasionLabel": "비",
+      "minTemperature": 22.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 28.0,
+      "pieces": {
+        "top": [
+          "tee_short"
+        ],
+        "bottom": [
+          "shorts"
+        ],
+        "outer": [
+          "rain"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "RAIN",
+        "WIND"
+      ]
+    },
+    {
+      "key": "f_autumn_basic",
+      "name": "아이보리 긴팔 + 청바지",
+      "gender": "FEMALE",
+      "season": "AUTUMN",
+      "occasionLabel": "일상",
+      "minTemperature": 15.0,
+      "maxTemperature": 24.0,
+      "idealTemperature": 20.0,
+      "pieces": {
+        "top": [
+          "tee_long"
+        ],
+        "bottom": [
+          "jeans"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "f_autumn_leather",
+      "name": "레더 재킷 + 미디 스커트",
+      "gender": "FEMALE",
+      "season": "AUTUMN",
+      "occasionLabel": "일상",
+      "minTemperature": 9.0,
+      "maxTemperature": 19.0,
+      "idealTemperature": 14.0,
+      "pieces": {
+        "top": [
+          "tee_long",
+          "knit"
+        ],
+        "bottom": [
+          "skirt_midi"
+        ],
+        "outer": [
+          "leather_jacket"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND",
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "key": "f_autumn_office",
+      "name": "블레이저 + 셔츠 + 와이드 슬랙스",
+      "gender": "FEMALE",
+      "season": "AUTUMN",
+      "occasionLabel": "출근",
+      "minTemperature": 11.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 17.0,
+      "pieces": {
+        "top": [
+          "shirt",
+          "blouse"
+        ],
+        "bottom": [
+          "slacks"
+        ],
+        "outer": [
+          "blazer"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "f_autumn_knit",
+      "name": "니트 + A라인 스커트",
+      "gender": "FEMALE",
+      "season": "AUTUMN",
+      "occasionLabel": "일상",
+      "minTemperature": 10.0,
+      "maxTemperature": 22.0,
+      "idealTemperature": 16.0,
+      "pieces": {
+        "top": [
+          "knit"
+        ],
+        "bottom": [
+          "skirt_midi"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "key": "f_winter_padding",
+      "name": "숏패딩 + 맨투맨 + 울 팬츠",
+      "gender": "FEMALE",
+      "season": "WINTER",
+      "occasionLabel": "일상",
+      "minTemperature": -18.0,
+      "maxTemperature": 9.0,
+      "idealTemperature": 1.0,
+      "pieces": {
+        "top": [
+          "sweatshirt",
+          "knit"
+        ],
+        "bottom": [
+          "warm_pants"
+        ],
+        "outer": [
+          "padding"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "f_winter_halfcoat",
+      "name": "하프코트 + 버건디 스커트",
+      "gender": "FEMALE",
+      "season": "WINTER",
+      "occasionLabel": "일상",
+      "minTemperature": 3.0,
+      "maxTemperature": 13.0,
+      "idealTemperature": 8.0,
+      "pieces": {
+        "top": [
+          "knit",
+          "turtleneck"
+        ],
+        "bottom": [
+          "skirt_midi"
+        ],
+        "outer": [
+          "coat_short"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND",
+        "WIND_SENSITIVE"
+      ]
+    },
+    {
+      "key": "f_winter_longcoat",
+      "name": "롱코트 + 터틀넥 + 슬랙스",
+      "gender": "FEMALE",
+      "season": "WINTER",
+      "occasionLabel": "출근",
+      "minTemperature": -10.0,
+      "maxTemperature": 12.0,
+      "idealTemperature": 4.0,
+      "pieces": {
+        "top": [
+          "turtleneck"
+        ],
+        "bottom": [
+          "slacks",
+          "warm_pants"
+        ],
+        "outer": [
+          "coat_long"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "f_winter_longpadding",
+      "name": "롱패딩 + 기모 청바지",
+      "gender": "FEMALE",
+      "season": "WINTER",
+      "occasionLabel": "일상",
+      "minTemperature": -50.0,
+      "maxTemperature": 5.0,
+      "idealTemperature": -8.0,
+      "pieces": {
+        "top": [
+          "knit",
+          "turtleneck"
+        ],
+        "bottom": [
+          "warm_pants"
+        ],
+        "outer": [
+          "padding"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "m_spring_zipup",
+      "name": "후드집업 + 조거",
+      "gender": "MALE",
+      "season": "SPRING",
+      "occasionLabel": "일상",
+      "minTemperature": 10.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 17.0,
+      "pieces": {
+        "top": [
+          "tee_long",
+          "tee_short"
+        ],
+        "bottom": [
+          "jogger"
+        ],
+        "outer": [
+          "zipup"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "m_spring_shirt",
+      "name": "옥스퍼드 셔츠 + 치노",
+      "gender": "MALE",
+      "season": "SPRING",
+      "occasionLabel": "출근",
+      "minTemperature": 16.0,
+      "maxTemperature": 27.0,
+      "idealTemperature": 22.0,
+      "pieces": {
+        "top": [
+          "shirt"
+        ],
+        "bottom": [
+          "slacks"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "m_spring_denim",
+      "name": "데님 재킷 + 카고 팬츠",
+      "gender": "MALE",
+      "season": "SPRING",
+      "occasionLabel": "일상",
+      "minTemperature": 10.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 17.0,
+      "pieces": {
+        "top": [
+          "tee_long",
+          "tee_short"
+        ],
+        "bottom": [
+          "cargo"
+        ],
+        "outer": [
+          "denim_jacket"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "m_summer_tee",
+      "name": "반팔 + 버뮤다 반바지",
+      "gender": "MALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 24.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 33.0,
+      "pieces": {
+        "top": [
+          "tee_short"
+        ],
+        "bottom": [
+          "shorts"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "m_summer_athleisure",
+      "name": "애슬레저",
+      "gender": "MALE",
+      "season": "SUMMER",
+      "occasionLabel": "운동",
+      "minTemperature": 24.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 32.0,
+      "pieces": {
+        "top": [
+          "sport_tee"
+        ],
+        "bottom": [
+          "sport_shorts"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "SPORT"
+      ]
+    },
+    {
+      "key": "m_summer_office",
+      "name": "카라 반팔 + 쿨슬랙스",
+      "gender": "MALE",
+      "season": "SUMMER",
+      "occasionLabel": "출근",
+      "minTemperature": 22.0,
+      "maxTemperature": 38.0,
+      "idealTemperature": 27.0,
+      "pieces": {
+        "top": [
+          "collar_tee"
+        ],
+        "bottom": [
+          "slacks"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "m_summer_linen",
+      "name": "린넨 반팔 셔츠 + 린넨 바지",
+      "gender": "MALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 23.0,
+      "maxTemperature": 40.0,
+      "idealTemperature": 28.0,
+      "pieces": {
+        "top": [
+          "shirt_short"
+        ],
+        "bottom": [
+          "slacks"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "m_summer_denim",
+      "name": "오버핏 반팔 + 쿨데님",
+      "gender": "MALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 21.0,
+      "maxTemperature": 32.0,
+      "idealTemperature": 25.0,
+      "pieces": {
+        "top": [
+          "tee_short"
+        ],
+        "bottom": [
+          "jeans"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "m_summer_hawaiian",
+      "name": "하와이안 셔츠 + 린넨 반바지",
+      "gender": "MALE",
+      "season": "SUMMER",
+      "occasionLabel": "일상",
+      "minTemperature": 24.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 30.0,
+      "pieces": {
+        "top": [
+          "shirt_short"
+        ],
+        "bottom": [
+          "shorts"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "m_summer_rain",
+      "name": "레인재킷 + 반바지",
+      "gender": "MALE",
+      "season": "SUMMER",
+      "occasionLabel": "비",
+      "minTemperature": 22.0,
+      "maxTemperature": 50.0,
+      "idealTemperature": 28.0,
+      "pieces": {
+        "top": [
+          "tee_short"
+        ],
+        "bottom": [
+          "shorts"
+        ],
+        "outer": [
+          "rain"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "RAIN",
+        "WIND"
+      ]
+    },
+    {
+      "key": "m_autumn_sweat",
+      "name": "맨투맨 + 청바지",
+      "gender": "MALE",
+      "season": "AUTUMN",
+      "occasionLabel": "일상",
+      "minTemperature": 11.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 17.0,
+      "pieces": {
+        "top": [
+          "sweatshirt"
+        ],
+        "bottom": [
+          "jeans"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "key": "m_autumn_blouson",
+      "name": "블루종 + 치노",
+      "gender": "MALE",
+      "season": "AUTUMN",
+      "occasionLabel": "일상",
+      "minTemperature": 7.0,
+      "maxTemperature": 21.0,
+      "idealTemperature": 14.0,
+      "pieces": {
+        "top": [
+          "tee_long",
+          "sweatshirt"
+        ],
+        "bottom": [
+          "slacks"
+        ],
+        "outer": [
+          "blouson"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "m_autumn_office",
+      "name": "블레이저 + 셔츠 + 슬랙스",
+      "gender": "MALE",
+      "season": "AUTUMN",
+      "occasionLabel": "출근",
+      "minTemperature": 11.0,
+      "maxTemperature": 23.0,
+      "idealTemperature": 17.0,
+      "pieces": {
+        "top": [
+          "shirt"
+        ],
+        "bottom": [
+          "slacks"
+        ],
+        "outer": [
+          "blazer"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "m_winter_coat",
+      "name": "롱코트 + 니트 + 슬랙스",
+      "gender": "MALE",
+      "season": "WINTER",
+      "occasionLabel": "출근",
+      "minTemperature": -12.0,
+      "maxTemperature": 12.0,
+      "idealTemperature": 3.0,
+      "pieces": {
+        "top": [
+          "knit",
+          "turtleneck"
+        ],
+        "bottom": [
+          "slacks",
+          "warm_pants"
+        ],
+        "outer": [
+          "coat_long"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "m_winter_padding",
+      "name": "숏패딩 + 기모 청바지",
+      "gender": "MALE",
+      "season": "WINTER",
+      "occasionLabel": "일상",
+      "minTemperature": -50.0,
+      "maxTemperature": 8.0,
+      "idealTemperature": -6.0,
+      "pieces": {
+        "top": [
+          "sweatshirt",
+          "knit"
+        ],
+        "bottom": [
+          "warm_pants"
+        ],
+        "outer": [
+          "padding"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    },
+    {
+      "key": "m_winter_duffle",
+      "name": "더플코트 + 터틀넥",
+      "gender": "MALE",
+      "season": "WINTER",
+      "occasionLabel": "일상",
+      "minTemperature": -8.0,
+      "maxTemperature": 13.0,
+      "idealTemperature": 6.0,
+      "pieces": {
+        "top": [
+          "turtleneck"
+        ],
+        "bottom": [
+          "slacks",
+          "warm_pants"
+        ],
+        "outer": [
+          "coat_short"
+        ],
+        "shoes": [
+          "sneakers",
+          "mesh_sneakers",
+          "loafers",
+          "boots",
+          "rain_sneakers",
+          "winter_boots"
+        ]
+      },
+      "tags": [
+        "WIND"
+      ]
+    }
+  ]
+}
