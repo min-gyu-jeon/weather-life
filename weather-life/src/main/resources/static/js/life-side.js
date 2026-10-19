@@ -38,6 +38,33 @@
         }
     };
 
+    // 복장/운동 박스 높이를 외출 준비물 + 빨래 건조 전망 칸(wl-life-side)의 실제 높이에 맞춘다.
+    // 데이터에 따라 준비물 개수·문구 길이가 바뀌므로 높이를 고정값으로 두지 않고 매번 측정한다.
+    const syncLifeCardHeights = () => {
+        const side = document.querySelector(".wl-life-side");
+        const outfit = document.querySelector(".wl-outfit");
+        const exercise = document.querySelector(".wl-exercise");
+        if (!side || !outfit || !exercise) return;
+
+        outfit.style.height = "";
+        exercise.style.height = "";
+
+        const targetHeight = Math.round(side.getBoundingClientRect().height);
+        if (targetHeight <= 0) return;
+
+        outfit.style.height = `${targetHeight}px`;
+        exercise.style.height = `${targetHeight}px`;
+    };
+
+    if (typeof ResizeObserver !== "undefined") {
+        window.addEventListener("DOMContentLoaded", () => {
+            const side = document.querySelector(".wl-life-side");
+            if (side) new ResizeObserver(syncLifeCardHeights).observe(side);
+        });
+    }
+    window.addEventListener("load", syncLifeCardHeights);
+    window.addEventListener("resize", syncLifeCardHeights);
+
     window.addEventListener("outfit-weather-loading", () => {
         reset("불러오는 중이에요");
     });

@@ -125,6 +125,12 @@
 }
 .wl-discomfort-title { font-size: 16px; font-weight: 700; }
 .wl-discomfort-date { font-size: 12px; color: var(--c-text-sub); }
+.wl-discomfort-level {
+    align-self: flex-start;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--c-text-sub);
+}
 
 .wl-thermometer {
     position: relative;
