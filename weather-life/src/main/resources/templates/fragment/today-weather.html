@@ -79,11 +79,10 @@
                 <p class="wl-discomfort-title">불쾌지수</p>
                 <small class="wl-discomfort-date" data-field="discomfortDate">오늘</small>
             </div>
-
             <div class="wl-thermometer">
                 <div class="wl-thermometer-track">
                     <img class="wl-thermometer-marker" data-field="discomfortMarker"
-                         th:src="@{/image/icon/bag.svg}" alt="불쾌지수 위치"
+                         th:src="@{/image/icon/expressions_color/01-comfortable.png}" alt="불쾌지수 위치"
                          hidden>
                 </div>
                 <div class="wl-thermometer-bulb"></div>
@@ -91,6 +90,7 @@
 
             <p class="wl-discomfort-value">
                 <strong data-field="discomfortIndex">—</strong>
+                <span class="wl-discomfort-level" data-field="discomfortLevel">—</span>
             </p>
         </aside>
     </div>

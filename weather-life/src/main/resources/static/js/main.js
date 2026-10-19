@@ -314,6 +314,22 @@
     const calcDiscomfortIndex = (tempC, humidityPct) =>
         0.81 * tempC + 0.01 * humidityPct * (0.99 * tempC - 14.3) + 46.3;
 
+    // weather_character_rules.json의 sticker.first_match 구간과 동일한 기준(68/75/80)
+    const discomfortLevelLabel = (di) => {
+        if (di < 68) return '쾌적';
+        if (di < 75) return '보통';
+        if (di < 80) return '나쁨';
+        return '매우 나쁨';
+    };
+
+    // /image/icon/expressions_color/ 의 01~04 표정 아이콘을 불쾌지수 단계에 맞춰 고른다.
+    const discomfortExpressionIcon = (di) => {
+        if (di < 68) return '/image/icon/expressions_color/01-comfortable.png';
+        if (di < 75) return '/image/icon/expressions_color/02-slight-discomfort.png';
+        if (di < 80) return '/image/icon/expressions_color/03-uncomfortable.png';
+        return '/image/icon/expressions_color/04-very-uncomfortable.png';
+    };
+
     const resetWeather = (dates) => {
         dates.forEach(({ key, date }) => {
             const card = document.querySelector(`[data-day="${key}"]`);
@@ -329,6 +345,7 @@
         const today = dates[0].date;
         setField(document, 'discomfortDate', `오늘 (${today.slice(5, 7)}월 ${today.slice(8)}일)`);
         setField(document, 'discomfortIndex', '—');
+        setField(document, 'discomfortLevel', '—');
         const marker = document.querySelector('[data-field="discomfortMarker"]');
         if (marker) marker.hidden = true;
     };
@@ -412,10 +429,12 @@
                         nearest.humidity >= 0 && nearest.humidity <= 100) {
                     const di = Math.max(0, Math.min(100, calcDiscomfortIndex(ai.temperature, nearest.humidity)));
                     setField(document, 'discomfortIndex', Math.round(di));
+                    setField(document, 'discomfortLevel', discomfortLevelLabel(di));
                     const marker = document.querySelector('[data-field="discomfortMarker"]');
                     if (marker) {
                         marker.hidden = false;
                         marker.style.bottom = `${di}%`;
+                        marker.src = discomfortExpressionIcon(di);
                         marker.title = detail;
                     }
                 }

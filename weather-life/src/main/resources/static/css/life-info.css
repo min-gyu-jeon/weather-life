@@ -24,6 +24,10 @@
     margin-bottom: 16px;
     align-items: start;
 }
+.wl-outfit .wl-life-visual,
+.wl-exercise .wl-life-visual {
+    align-items: center;
+}
 .wl-life-character {
     display: block;
     width: 65%;
