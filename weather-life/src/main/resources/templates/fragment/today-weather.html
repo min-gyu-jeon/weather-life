@@ -5,7 +5,7 @@
 <!--
   오늘의 날씨: 왼쪽(오늘 큰 카드 + 내일/모레 작은 카드 2칸) / 오른쪽(불쾌지수, 왼쪽 전체 높이에 맞춰 늘어남).
   초기 렌더링은 th:with 의 목업 값을 보여주고, js/main.js 가 아래 API로 실제 값을 덮어쓴다.
-    - AI 예측 온도(data-field="aiTemp")      : GET /api/weather/aitest (AiForecastController.forecastTest)
+    - AI 예측 온도(data-field="aiTemp")      : GET /api/weather/ai?gu=... (AiForecastController.forecast)
     - 기상청 온도(data-field="kmaTemp")       : GET /api/short?regionName=... (APIController.getShortForecast)
     - 불쾌지수(data-field="discomfortIndex") : AI 예측 온도 + 기상청 습도(REH)로 계산
 -->

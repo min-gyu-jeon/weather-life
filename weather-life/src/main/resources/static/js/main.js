@@ -204,7 +204,7 @@
 })();
 
 // ===== 오늘의 날씨: 오늘/내일/모레 AI 예측 온도 + 기상청 온도, 불쾌지수 =====
-// AI 예측 온도(AiForecastController.forecastTest, GET /api/weather/aitest)와
+// AI 예측 온도(AiForecastController.forecast, GET /api/weather/ai)와
 // 기상청 온도·습도(APIController.getShortForecast, GET /api/short)로 각 카드를 채운다.
 // 불쾌지수는 오늘의 AI 예측 온도 + 기상청 습도(REH)로 계산해 온도계 하단에 표시하고,
 // 온도계를 0~100 로 보고 그 값의 위치에 /image/icon/bag.svg 마커를 놓는다.
@@ -231,9 +231,9 @@
         });
     };
 
-    // AiForecastController.forecastTest 응답: 날짜(yyyy-MM-dd) -> AI 예측 기온
-    const fetchAiTemps = async () => {
-        const res = await fetch('/api/weather/aitest');
+    // AiForecastController.forecast 응답: 날짜(yyyy-MM-dd) -> AI 예측 기온
+    const fetchAiTemps = async (district) => {
+        const res = await fetch(`/api/weather/ai?gu=${encodeURIComponent(district)}`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         const byDate = new Map();
@@ -285,7 +285,7 @@
     const loadTodayWeather = async (district) => {
         console.info(LOG, '오늘의 날씨 요청:', district);
         try {
-            const [aiTemps, kmaByDate] = await Promise.all([fetchAiTemps(), fetchKmaByDate(district)]);
+            const [aiTemps, kmaByDate] = await Promise.all([fetchAiTemps(district), fetchKmaByDate(district)]);
 
             const now = new Date();
             const nowHourKey = `${pad(now.getHours())}00`;
